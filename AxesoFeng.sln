@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxesoFeng", "AxesoFeng\AxesoFeng.csproj", "{7C0736A3-BC6F-41B3-B982-2CD7BBE09037}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileEPC", "..\Libraries\MobileEPC\MobileEPC\MobileEPC\MobileEPC.csproj", "{D74D5145-1159-42D8-9921-B57963F231E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestSharp.Compact", "..\Tools\RestSharp-master\RestSharp\RestSharp.Compact.csproj", "{A29E330B-F854-4287-BEB2-C4CBE9D9C637}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C0736A3-BC6F-41B3-B982-2CD7BBE09037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C0736A3-BC6F-41B3-B982-2CD7BBE09037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C0736A3-BC6F-41B3-B982-2CD7BBE09037}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7C0736A3-BC6F-41B3-B982-2CD7BBE09037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C0736A3-BC6F-41B3-B982-2CD7BBE09037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C0736A3-BC6F-41B3-B982-2CD7BBE09037}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D74D5145-1159-42D8-9921-B57963F231E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D74D5145-1159-42D8-9921-B57963F231E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D74D5145-1159-42D8-9921-B57963F231E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D74D5145-1159-42D8-9921-B57963F231E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A29E330B-F854-4287-BEB2-C4CBE9D9C637}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A29E330B-F854-4287-BEB2-C4CBE9D9C637}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A29E330B-F854-4287-BEB2-C4CBE9D9C637}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A29E330B-F854-4287-BEB2-C4CBE9D9C637}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
