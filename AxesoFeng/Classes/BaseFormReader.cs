@@ -45,13 +45,15 @@ namespace AxesoFeng.Classes
             reportGrid.TableStyles.Add(table.getStyle());
         }
 
-        protected void ShowMessages(List<string> messages, String valueWarehouse)
+        protected bool ShowMessages(List<string> messages, String valueWarehouse,int Type)
         {
             if (messageForm != null)
             {
-                messageForm.fillMessages(messages,valueWarehouse,this.folio);
+                messageForm.fillMessages(messages,valueWarehouse,this.folio,Type);
                 messageForm.Show();
+                return messageForm.varSave;
             }
+            return false;
         }
 
         protected List<RespFolio.Products> ProductsRead()
@@ -69,7 +71,7 @@ namespace AxesoFeng.Classes
             return products;
         }
 
-        protected void CompareTo(String valueWarehouse)
+        protected void CompareTo(String valueWarehouse,int type)
         {
             Cursor.Current = Cursors.WaitCursor;
             FolioOrder folio = new FolioOrder(menu.configData.url);
@@ -80,10 +82,10 @@ namespace AxesoFeng.Classes
             {
                 if (MessageBox.Show("¿Desea guardar la lectura?", "OK", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-                    messageForm.Save(valueWarehouse, this.folio);
+                    messageForm.Save(valueWarehouse, this.folio);                    
             }
             else
-                ShowMessages(messages, valueWarehouse);
+                ShowMessages(messages, valueWarehouse,type);
             Cursor.Current = Cursors.Default;
         }
     }

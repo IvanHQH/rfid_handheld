@@ -17,6 +17,13 @@ namespace AxesoFeng.Forms
         //private String nameFile;
         private String folio;
         private String valueWarehouse;
+        private int type;
+        private bool _save;
+
+        public bool varSave 
+        {
+            get { return _save; }
+        }
 
         public MessageComparison(MenuForm form)
         {            
@@ -25,7 +32,7 @@ namespace AxesoFeng.Forms
             setColors(menu.configData);
         }
 
-        public void fillMessages(List<String> messages,String valueWarehouse, String folio)
+        public void fillMessages(List<String> messages,String valueWarehouse, String folio,int type)
         {
             //this.nameFile = nameFile;
             this.valueWarehouse = valueWarehouse;
@@ -33,6 +40,7 @@ namespace AxesoFeng.Forms
             messagesListview.Items.Clear();
             foreach (String message in messages)
                 messagesListview.Items.Add(new ListViewItem(message));
+            this.type = type;
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
@@ -84,6 +92,7 @@ namespace AxesoFeng.Forms
             labelLog.Text = "";
             MessageBox.Show("Orden guardada");
             menu.showCaptureFolio = false;
+            _save = true;
             this.Hide();
         }
 
@@ -96,12 +105,12 @@ namespace AxesoFeng.Forms
                 //foreach (UpcInventory item in reader.fillUPCsInventory(this))
                 foreach(ListViewItem item in messagesListview.Items)
                 {
-                    writer.WriteLine(item.Text);
+                    writer.WriteLine(item.Text+",");
                 }
             }
         }
 
-        protected String NameFile(TypeFile type, String valueWarehouse,DateTime timestamp,Boolean message)
+        protected String NameFile(TypeFile Type, String valueWarehouse,DateTime timestamp,Boolean message)
         {
             
             String dataName = menu.idCustomer.ToString();
@@ -113,12 +122,21 @@ namespace AxesoFeng.Forms
                 path = "\\rfiddata\\message_" + dataName + ".csv";
             else
             {
-                if (TypeFile.epc == type)
-                    path = "\\rfiddata\\iepcs_" + dataName + ".csv";
+                if(this.type == 1)
+                    path = "\\rfiddata\\i";
                 else
-                    path = "\\rfiddata\\iupcs_" + dataName + ".csv";
+                    path = "\\rfiddata\\o";
+                if (TypeFile.epc == Type)
+                    path += "epcs_" + dataName + ".csv";
+                else
+                    path += "upcs_" + dataName + ".csv";
             }
             return path;
+        }
+
+        private void MessageComparison_GotFocus(object sender, EventArgs e)
+        {
+            _save = false;
         }
     }
 }

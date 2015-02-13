@@ -48,6 +48,8 @@ namespace AxesoFeng
         //Configuration
         public Config configData;
 
+        public string myResDir;
+
         public enum typeFolio { loading = 1,unloading = 2}
 
         public MenuForm()
@@ -92,7 +94,7 @@ namespace AxesoFeng
               */
 
             string myDir = Path.GetDirectoryName(Assembly.GetCallingAssembly().GetName().CodeBase);
-            string myResDir = Path.Combine(myDir, @"\rfiddata\img");
+            myResDir = Path.Combine(myDir, @"\rfiddata\img");
             Image image;
             
             image = new Bitmap(Path.Combine(myResDir, "logo_hqh_med.bmp"));
@@ -161,6 +163,13 @@ namespace AxesoFeng
             //orderexit.Show();
             data = new CaptureFolio(this, MenuForm.typeFolio.loading);
             data.Show();
+        }
+
+        private void pbClear_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Está seguro de eliminar todas las lecturas?", "Confirmación", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            FolioOrder.DeleteFiles();
         }
 
     }

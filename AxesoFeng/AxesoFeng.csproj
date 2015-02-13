@@ -221,6 +221,9 @@
   <ItemGroup>
     <None Include="Properties\DataSources\Upc.datasource" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\read.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

@@ -9,12 +9,14 @@ using System.Windows.Forms;
 using MobileEPC;
 using AxesoFeng.Classes;
 using AxesoFeng.Forms;
+using System.IO;
 
 namespace AxesoFeng
 {
     public partial class OrderExitForm : BaseFormReader
     {
         public delegate void tdelegate();
+        private Image image;
 
         public OrderExitForm(MenuForm form)
         {
@@ -25,6 +27,7 @@ namespace AxesoFeng
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
+            labelLog.Text = "";
             menu.showCaptureFolio = false;
             this.Hide();
         }
@@ -44,6 +47,7 @@ namespace AxesoFeng
 
         private void ClearButton_Click(object sender, EventArgs e)
         {
+            labelLog.Text = "";
             menu.rrfid.clear();
             reportGrid.DataSource = null;
         }
@@ -57,6 +61,15 @@ namespace AxesoFeng
         {
             if (messageForm == null)
                 messageForm = new MessageComparison(menu);
+            if (messageForm.varSave)
+                this.Hide();
+            menu.rrfid.ReadHandler = delegate(String tag)
+            {
+                labelLog.Invoke(new tdelegate(delegate()
+                {
+                    labelLog.Text = "Tag: " + menu.rrfid.m_TagTable.Count.ToString();
+                }));
+            };
 
             menu.rrfid.ValidTagHandler = delegate(String tag)
             {
@@ -92,7 +105,31 @@ namespace AxesoFeng
                 return;
             }
             else
-                CompareTo((WarehouseBox.SelectedItem as ComboboxItem).Value.ToString());
+                CompareTo((WarehouseBox.SelectedItem as ComboboxItem).Value.ToString(),2);
+        }
+
+        private void OrderExitForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void startReading_Click(object sender, EventArgs e)
+        {
+            if (menu.rrfid.isReading)
+            {
+                menu.rrfid.stop();
+                //startReading.Text = "Leer";
+                image = new Bitmap(Path.Combine(menu.myResDir, "trigger.bmp"));
+                pbRead.Image = image;
+                RefreshGrid(ref reportGrid);
+            }
+            else
+            {
+                menu.rrfid.start();
+                //startReading.Text = "Leyendo";
+                image = new Bitmap(Path.Combine(menu.myResDir, "read.bmp"));
+                pbRead.Image = image;
+            }
         }
 
     }

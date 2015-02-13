@@ -56,5 +56,12 @@ namespace AxesoFeng.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Bitmap read {
+            get {
+                object obj = ResourceManager.GetObject("read", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

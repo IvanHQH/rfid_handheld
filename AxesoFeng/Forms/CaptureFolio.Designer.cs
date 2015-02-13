@@ -29,22 +29,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaptureFolio));
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
-            this.NextButton = new System.Windows.Forms.Button();
             this.folioLbl = new System.Windows.Forms.Label();
             this.FolioBox = new System.Windows.Forms.TextBox();
-            this.ExitButton = new System.Windows.Forms.Button();
+            this.pbBack = new System.Windows.Forms.PictureBox();
+            this.pbNext = new System.Windows.Forms.PictureBox();
             this.SuspendLayout();
-            // 
-            // NextButton
-            // 
-            this.NextButton.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.NextButton.Location = new System.Drawing.Point(120, 70);
-            this.NextButton.Name = "NextButton";
-            this.NextButton.Size = new System.Drawing.Size(117, 35);
-            this.NextButton.TabIndex = 6;
-            this.NextButton.Text = "Next";
-            this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
             // 
             // folioLbl
             // 
@@ -60,15 +51,21 @@
             this.FolioBox.Size = new System.Drawing.Size(234, 21);
             this.FolioBox.TabIndex = 5;
             // 
-            // ExitButton
+            // pbBack
             // 
-            this.ExitButton.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.ExitButton.Location = new System.Drawing.Point(3, 70);
-            this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(111, 35);
-            this.ExitButton.TabIndex = 8;
-            this.ExitButton.Text = "Regresar";
-            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
+            this.pbBack.Image = ((System.Drawing.Image)(resources.GetObject("pbBack.Image")));
+            this.pbBack.Location = new System.Drawing.Point(3, 70);
+            this.pbBack.Name = "pbBack";
+            this.pbBack.Size = new System.Drawing.Size(35, 25);
+            this.pbBack.Click += new System.EventHandler(this.ExitButton_Click);
+            // 
+            // pbNext
+            // 
+            this.pbNext.Image = ((System.Drawing.Image)(resources.GetObject("pbNext.Image")));
+            this.pbNext.Location = new System.Drawing.Point(44, 70);
+            this.pbNext.Name = "pbNext";
+            this.pbNext.Size = new System.Drawing.Size(35, 25);
+            this.pbNext.Click += new System.EventHandler(this.NextButton_Click);
             // 
             // CaptureFolio
             // 
@@ -76,13 +73,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 268);
-            this.Controls.Add(this.ExitButton);
-            this.Controls.Add(this.NextButton);
+            this.Controls.Add(this.pbNext);
+            this.Controls.Add(this.pbBack);
             this.Controls.Add(this.folioLbl);
             this.Controls.Add(this.FolioBox);
             this.Menu = this.mainMenu1;
             this.Name = "CaptureFolio";
-            this.Text = "Input Folio";
+            this.Text = "Captura Folio";
             this.Load += new System.EventHandler(this.CaptureDataForm_Load);
             this.GotFocus += new System.EventHandler(this.CaptureFolio_GotFocus);
             this.ResumeLayout(false);
@@ -91,9 +88,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button NextButton;
         private System.Windows.Forms.Label folioLbl;
         private System.Windows.Forms.TextBox FolioBox;
-        private System.Windows.Forms.Button ExitButton;
+        private System.Windows.Forms.PictureBox pbBack;
+        private System.Windows.Forms.PictureBox pbNext;
     }
 }

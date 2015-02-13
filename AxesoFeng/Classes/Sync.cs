@@ -158,7 +158,8 @@ namespace AxesoFeng
             Directory.CreateDirectory(@"\rfiddataold");
             string[] filePaths = Directory.GetFiles(@"\rfiddata");
             List<string> upcFiles = new List<string>();
-            List<string> upcFilesAll = new List<string>();
+            List<string> invetories = new List<string>();
+            List<string> orderExists = new List<string>();
             List<string> epcFiles = new List<string>();
             List<string> messages = new List<string>();
 
@@ -167,14 +168,16 @@ namespace AxesoFeng
             {
                 if (path.Contains("epc") )
                     epcFiles.Add(path);
-                if (path.Contains("epc") || path.Contains("upc"))
-                    upcFilesAll.Add(path);
+                if (path.Contains("iepc"))
+                    invetories.Add(path);
+                if (path.Contains("oepc"))
+                    orderExists.Add(path);
                 if (path.Contains("message"))
                     messages.Add(path);
             }
 
-            sync.updateInventory(upcFiles.Count.ToString() + " Inventarios");
-            sync.updateOrder(epcFiles.Count.ToString() + " Salidas");
+            sync.updateInventory(invetories.Count.ToString() + " Inventarios");
+            sync.updateOrder(orderExists.Count.ToString() + " Salidas");
             Application.DoEvents();
 
             int numInventories = upcFiles.Count;
@@ -206,24 +209,33 @@ namespace AxesoFeng
                         response = client.Execute(request);
                         if (!requestError(response.StatusCode.ToString()))
                             return false;
-                    }                    
+                    }
+                    try {
+                        String nameFileMessage = path1.Replace("iepcs", "message").Replace("oepcs", "message");
+                        request = new RestRequest("logs", Method.POST);
+                        request.RequestFormat = DataFormat.Json;
+                        request.AddBody(LogToJson(deserealizeNameFileLog(nameFileMessage)));
+                        response = client.Execute(request);
+                        if (!requestError(response.StatusCode.ToString()))
+                            return false;
+                        Application.DoEvents();
+                        File.Move(nameFileMessage, nameFileMessage.Replace("rfiddata", "rfiddataold"));      
+                    }
+                    catch (Exception exc) { }
                 }
-                numInventories--;
-                sync.updateInventory(numInventories + " Inventarios");
+                if (path1.Contains("iepc"))
+                {
+                    numInventories--;
+                    sync.updateInventory(numInventories + " Inventarios");
+                }
+                else if (path1.Contains("oepc"))
+                {
+                    numOrders--;
+                    sync.updateOrder(numOrders + " Salidas");
+                }
                 Application.DoEvents();
                 File.Move(path1, path1.Replace("rfiddata", "rfiddataold"));
                 File.Move(path1.Replace("epc", "upc"), path1.Replace("rfiddata", "rfiddataold").Replace("epc", "upc"));
-            }
-            foreach (String path1 in messages)
-            {
-                var request = new RestRequest("logs", Method.POST);
-                request.RequestFormat = DataFormat.Json;
-                request.AddBody(LogToJson(deserealizeNameFileLog(path1)));
-                IRestResponse response = client.Execute(request);
-                if (!requestError(response.StatusCode.ToString()))
-                    return false;
-                Application.DoEvents();
-                File.Move(path1, path1.Replace("rfiddata", "rfiddataold"));
             }
             Cursor.Current = Cursors.Default;
             return true;
@@ -439,5 +451,6 @@ namespace AxesoFeng
 
             return product;
         }
+
     }
 }

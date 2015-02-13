@@ -15,6 +15,7 @@ namespace AxesoFeng
     {
         private RestClient client;
         string bu;
+
         public FolioOrder(String BaseUrl)
         {
             client = new RestClient(BaseUrl);
@@ -76,13 +77,13 @@ namespace AxesoFeng
                         find = true;
                         if (prodResp.quantity != prodFile.quantity){                            
                             Inequalities.Add("hay " + prodFile.quantity.ToString()+ 
-                                " de " +prodResp.name+ ",se esperaban " + prodResp.quantity);
+                                " de " +prodResp.name+ " se esperaban " + prodResp.quantity);
                             break;
                         }
                     }
                 }
                 if (find == false)
-                    Inequalities.Add(prodResp.name + " ,no se encuentra en el folio");
+                    Inequalities.Add(prodResp.name + " no se encuentra en el folio");
             }
             foreach (RespFolio.Products prodFile in productsFile)
             {
@@ -96,7 +97,7 @@ namespace AxesoFeng
                     }
                 }
                 if (find == false)
-                    Inequalities.Add(prodFile.name + " ,no se esperaba en el folio");
+                    Inequalities.Add(prodFile.name + " no se esperaba en el folio");
             }
             return Inequalities;
         }
@@ -148,6 +149,22 @@ namespace AxesoFeng
                     MessageBox.Show(StatusCode, "Error");
                     return false;
             }
+        }
+
+        public static void DeleteFiles()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            string[] filePaths = Directory.GetFiles(@"\rfiddata");
+
+            foreach (String path in filePaths)
+            {
+                if (path.Contains("iupc") || path.Contains("oupc") || path.Contains("iepc") 
+                    || path.Contains("oepc") || path.Contains("message"))
+                {
+                    File.Delete(path);
+                }
+            }
+            Cursor.Current = Cursors.Default;
         }
 
     }

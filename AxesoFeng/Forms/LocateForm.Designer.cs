@@ -29,11 +29,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LocateForm));
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.EPCLabel = new System.Windows.Forms.Label();
-            this.ExitButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer();
+            this.pbBack = new System.Windows.Forms.PictureBox();
             this.SuspendLayout();
             // 
             // EPCLabel
@@ -41,15 +42,6 @@
             this.EPCLabel.Location = new System.Drawing.Point(41, 0);
             this.EPCLabel.Name = "EPCLabel";
             this.EPCLabel.Size = new System.Drawing.Size(196, 20);
-            // 
-            // ExitButton
-            // 
-            this.ExitButton.Location = new System.Drawing.Point(109, 23);
-            this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(128, 23);
-            this.ExitButton.TabIndex = 1;
-            this.ExitButton.Text = "Regresar";
-            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // label1
             // 
@@ -65,14 +57,22 @@
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // pbBack
+            // 
+            this.pbBack.Image = ((System.Drawing.Image)(resources.GetObject("pbBack.Image")));
+            this.pbBack.Location = new System.Drawing.Point(3, 33);
+            this.pbBack.Name = "pbBack";
+            this.pbBack.Size = new System.Drawing.Size(35, 25);
+            this.pbBack.Click += new System.EventHandler(this.ExitButton_Click);
+            // 
             // LocateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 268);
+            this.Controls.Add(this.pbBack);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.EPCLabel);
             this.Menu = this.mainMenu1;
             this.Name = "LocateForm";
@@ -85,8 +85,8 @@
         #endregion
 
         private System.Windows.Forms.Label EPCLabel;
-        private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.PictureBox pbBack;
     }
 }

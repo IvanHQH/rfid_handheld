@@ -29,15 +29,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UPCSearchForm));
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.label1 = new System.Windows.Forms.Label();
             this.ProductLabel = new System.Windows.Forms.Label();
             this.UPCLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.EPCList = new System.Windows.Forms.ListBox();
-            this.ExitButton = new System.Windows.Forms.Button();
             this.TagsLabel = new System.Windows.Forms.Label();
-            this.SaveButton = new System.Windows.Forms.Button();
+            this.pbBack = new System.Windows.Forms.PictureBox();
+            this.pbSave = new System.Windows.Forms.PictureBox();
             this.SuspendLayout();
             // 
             // label1
@@ -78,33 +79,29 @@
             this.EPCList.TabIndex = 6;
             this.EPCList.SelectedIndexChanged += new System.EventHandler(this.EPCList_SelectedIndexChanged);
             // 
-            // ExitButton
-            // 
-            this.ExitButton.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.ExitButton.Location = new System.Drawing.Point(151, 157);
-            this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(75, 20);
-            this.ExitButton.TabIndex = 7;
-            this.ExitButton.Text = "Regresar";
-            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
-            // 
             // TagsLabel
             // 
             this.TagsLabel.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.TagsLabel.Location = new System.Drawing.Point(0, 157);
+            this.TagsLabel.Location = new System.Drawing.Point(126, 163);
             this.TagsLabel.Name = "TagsLabel";
             this.TagsLabel.Size = new System.Drawing.Size(100, 20);
             this.TagsLabel.Text = "Tags: 0";
             // 
-            // SaveButton
+            // pbBack
             // 
-            this.SaveButton.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.SaveButton.Location = new System.Drawing.Point(79, 157);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(66, 20);
-            this.SaveButton.TabIndex = 12;
-            this.SaveButton.Text = "Guardar";
-            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            this.pbBack.Image = ((System.Drawing.Image)(resources.GetObject("pbBack.Image")));
+            this.pbBack.Location = new System.Drawing.Point(4, 158);
+            this.pbBack.Name = "pbBack";
+            this.pbBack.Size = new System.Drawing.Size(35, 25);
+            this.pbBack.Click += new System.EventHandler(this.ExitButton_Click);
+            // 
+            // pbSave
+            // 
+            this.pbSave.Image = ((System.Drawing.Image)(resources.GetObject("pbSave.Image")));
+            this.pbSave.Location = new System.Drawing.Point(45, 158);
+            this.pbSave.Name = "pbSave";
+            this.pbSave.Size = new System.Drawing.Size(35, 25);
+            this.pbSave.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // UPCSearchForm
             // 
@@ -112,9 +109,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 268);
-            this.Controls.Add(this.SaveButton);
+            this.Controls.Add(this.pbSave);
+            this.Controls.Add(this.pbBack);
             this.Controls.Add(this.TagsLabel);
-            this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.EPCList);
             this.Controls.Add(this.UPCLabel);
             this.Controls.Add(this.label3);
@@ -135,8 +132,8 @@
         private System.Windows.Forms.Label UPCLabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox EPCList;
-        private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.Label TagsLabel;
-        private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.PictureBox pbBack;
+        private System.Windows.Forms.PictureBox pbSave;
     }
 }
