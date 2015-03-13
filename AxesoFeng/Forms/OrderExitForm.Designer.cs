@@ -42,7 +42,7 @@
             // 
             // WarehouseBox
             // 
-            this.WarehouseBox.Location = new System.Drawing.Point(4, 4);
+            this.WarehouseBox.Location = new System.Drawing.Point(4, 138);
             this.WarehouseBox.Name = "WarehouseBox";
             this.WarehouseBox.Size = new System.Drawing.Size(224, 22);
             this.WarehouseBox.TabIndex = 0;
@@ -50,7 +50,7 @@
             // reportGrid
             // 
             this.reportGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.reportGrid.Location = new System.Drawing.Point(4, 24);
+            this.reportGrid.Location = new System.Drawing.Point(4, 3);
             this.reportGrid.Name = "reportGrid";
             this.reportGrid.Size = new System.Drawing.Size(224, 136);
             this.reportGrid.TabIndex = 1;

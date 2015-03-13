@@ -103,17 +103,22 @@ namespace AxesoFeng.Forms
             using (CsvFileWriter writer = new CsvFileWriter(path))
             {
                 //foreach (UpcInventory item in reader.fillUPCsInventory(this))
-                foreach(ListViewItem item in messagesListview.Items)
+                if (messagesListview.Items.Count != 0)
                 {
-                    writer.WriteLine(item.Text+",");
+                    foreach (ListViewItem item in messagesListview.Items)
+                    {
+                        writer.WriteLine(item.Text + ",");
+                    }
                 }
+                else
+                    writer.WriteLine("lectura existosa");
             }
         }
 
         protected String NameFile(TypeFile Type, String valueWarehouse,DateTime timestamp,Boolean message)
         {
             
-            String dataName = menu.idCustomer.ToString();
+            String dataName = menu.idClient.ToString();
             dataName += "_" + valueWarehouse;//(WarehouseBox.SelectedItem as ComboboxItem).Value.ToString();
             dataName += "_" + folio;
             dataName += "_" + FormatDateTime(timestamp);

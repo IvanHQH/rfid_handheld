@@ -83,7 +83,7 @@ namespace AxesoFeng
                     }
                 }
                 if (find == false)
-                    Inequalities.Add(prodResp.name + " no se encuentra en el folio");
+                    Inequalities.Add(prodResp.name + " no se encuentra");
             }
             foreach (RespFolio.Products prodFile in productsFile)
             {
@@ -97,7 +97,7 @@ namespace AxesoFeng
                     }
                 }
                 if (find == false)
-                    Inequalities.Add(prodFile.name + " no se esperaba en el folio");
+                    Inequalities.Add(prodFile.name + " no se esperaba");
             }
             return Inequalities;
         }

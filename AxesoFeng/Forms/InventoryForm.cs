@@ -31,6 +31,15 @@ namespace AxesoFeng
             InitializeComponent();
             menu = form;
             setColors(menu.configData);
+            switch ((Global.Version)menu.configData.version)
+            {
+                case Global.Version.ISCAM:
+                case Global.Version.INVENTORY_PLACE:
+                    break;
+                case Global.Version.INVENTORY:
+                     WarehouseBox.Visible = false;
+                    break;
+            }               
         }
 
         private void startReading_Click(object sender, EventArgs e)
@@ -38,7 +47,6 @@ namespace AxesoFeng
             if(menu.rrfid.isReading)
             {
                 menu.rrfid.stop();
-                //startReading.Text="Leer";
                 image = new Bitmap(Path.Combine(menu.myResDir, "trigger.bmp"));
                 pbRead.Image= image;
                 RefreshGrid(ref reportGrid);
@@ -46,7 +54,6 @@ namespace AxesoFeng
             else
             {                
                 menu.rrfid.start();
-                //startReading.Text = "Leyendo"; 
                 image = new Bitmap(Path.Combine(menu.myResDir, "read.bmp"));
                 pbRead.Image = image;
             }
@@ -57,7 +64,6 @@ namespace AxesoFeng
             menu.showCaptureFolio = false;
             this.Hide();
             menu.rrfid.clear();
-            //startReading.Text = "Leer";
             image = new Bitmap(Path.Combine(menu.myResDir, "trigger.bmp"));
             pbRead.Image = image;
             labelLog.Text = "";
@@ -73,7 +79,6 @@ namespace AxesoFeng
         private void ClearButton_Click(object sender, EventArgs e)
         {
             menu.rrfid.clear();
-            //startReading.Text = "Leer";
             image = new Bitmap(Path.Combine(menu.myResDir, "trigger.bmp"));
             pbRead.Image = image;
             labelLog.Text = "";
@@ -127,13 +132,19 @@ namespace AxesoFeng
 
         private void Comparar_Click(object sender, EventArgs e)
         {
-            if (WarehouseBox.SelectedItem == null)
+            switch ((Global.Version)menu.configData.version)
             {
-                MessageBox.Show("Seleccione un almacén", "Orden de Salida");
-                return;
-            }
-            else
-                CompareTo((WarehouseBox.SelectedItem as ComboboxItem).Value.ToString(), 1);
+                case Global.Version.ISCAM:
+                case Global.Version.INVENTORY_PLACE:
+                    if (WarehouseBox.SelectedItem == null)
+                        MessageBox.Show("Seleccione un almacén", "Orden de Salida");
+                    else
+                        CompareTo((WarehouseBox.SelectedItem as ComboboxItem).Value.ToString(), 1);
+                    break;
+                case Global.Version.INVENTORY:
+                    CompareTo("0", 1);
+                    break;
+            }                
         }
 
     }

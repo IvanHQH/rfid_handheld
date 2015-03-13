@@ -18,7 +18,7 @@ namespace AxesoFeng
 
         private RestClient client;
 
-        //private 
+        private int idClient;
 
         private class GetObject {
             public List<SyncProduct> products { get; set; }
@@ -48,18 +48,20 @@ namespace AxesoFeng
             public int type;
             public JsonArray epcs = new JsonArray();
             public int warehouse_id;
+            public int client_id;
             
             public enum index
             {
-                customer_id = 1,
+                client_id = 1,
                 warehouse_id = 2,
                 folio = 3,
                 date_time = 4,
             }
 
-            public SyncOrdenEsM(int customer_id,string date_time,string folio, int type,int warehouse_id)
+            public SyncOrdenEsM(int client_id,string date_time,string folio, int type,int warehouse_id)
             {
-                this.customer_id = customer_id;
+                this.client_id = client_id;
+                this.customer_id = 0;
                 this.date_time = date_time;
                 this.folio = folio;
                 this.type = type;
@@ -97,18 +99,19 @@ namespace AxesoFeng
             public int type;
             public String description;
             public String date_time;
-            public int customer_id;
+            public int client_id;
             public String folio;
         }
 
-        public Sync(String BaseUrl)
+        public Sync(String BaseUrl,int idClient)
         {
             client = new RestClient(BaseUrl);
+            this.idClient = idClient;
         }
 
         public bool GETTest()
         {
-            var request = new RestRequest("test", Method.GET);
+            var request = new RestRequest("test_conection", Method.GET);
             IRestResponse response = client.Execute(request);
             String text = response.Content;
 
@@ -222,20 +225,20 @@ namespace AxesoFeng
                         File.Move(nameFileMessage, nameFileMessage.Replace("rfiddata", "rfiddataold"));      
                     }
                     catch (Exception exc) { }
+                    if (path1.Contains("iepc"))
+                    {
+                        numInventories--;
+                        sync.updateInventory(numInventories + " Inventarios");
+                    }
+                    else if (path1.Contains("oepc"))
+                    {
+                        numOrders--;
+                        sync.updateOrder(numOrders + " Salidas");
+                    }
+                    Application.DoEvents();
+                    File.Move(path1, path1.Replace("rfiddata", "rfiddataold"));
+                    File.Move(path1.Replace("epc", "upc"), path1.Replace("rfiddata", "rfiddataold").Replace("epc", "upc"));
                 }
-                if (path1.Contains("iepc"))
-                {
-                    numInventories--;
-                    sync.updateInventory(numInventories + " Inventarios");
-                }
-                else if (path1.Contains("oepc"))
-                {
-                    numOrders--;
-                    sync.updateOrder(numOrders + " Salidas");
-                }
-                Application.DoEvents();
-                File.Move(path1, path1.Replace("rfiddata", "rfiddataold"));
-                File.Move(path1.Replace("epc", "upc"), path1.Replace("rfiddata", "rfiddataold").Replace("epc", "upc"));
             }
             Cursor.Current = Cursors.Default;
             return true;
@@ -278,7 +281,7 @@ namespace AxesoFeng
             SyncOrdenEsM orden = null;
             try
             {
-                orden = new SyncOrdenEsM(int.Parse(comp[(int)SyncOrdenEsM.index.customer_id]),
+                orden = new SyncOrdenEsM(int.Parse(comp[(int)SyncOrdenEsM.index.client_id]),
                     FormatDateTime(comp[(int)SyncOrdenEsM.index.date_time].Replace(".csv","")),
                     comp[(int)SyncOrdenEsM.index.folio],
                     Type(comp[0].Replace("\\rfiddata\\","")[0]),
@@ -296,7 +299,7 @@ namespace AxesoFeng
             try
             {
                 log = new SyncLog();
-                log.customer_id = int.Parse(comp[(int)SyncOrdenEsM.index.customer_id]);
+                log.client_id = int.Parse(comp[(int)SyncOrdenEsM.index.client_id]);
                 log.date_time = FormatDateTime(comp[(int)SyncOrdenEsM.index.date_time].Replace(".csv", ""));
                 log.folio = comp[(int)SyncOrdenEsM.index.folio];
                 log.type = Type(comp[0].Replace("\\rfiddata\\", "")[0]);
@@ -351,7 +354,8 @@ namespace AxesoFeng
         private JsonObject OrderMToJson(SyncOrdenEsM OrderM)
         {
             JsonObject json = new JsonObject();
-            json.Add("customer_id",OrderM.customer_id);
+            json.Add("client_id", OrderM.client_id);
+            //json.Add("customer_id", OrderM.customer_id);
             json.Add("created_at",OrderM.date_time);
             json.Add("updated_at",OrderM.date_time);
             json.Add("folio",OrderM.folio);
@@ -372,13 +376,14 @@ namespace AxesoFeng
             json.Add("quantity", OrderD.quantity);
             json.Add("upc", OrderD.upc);
             json.Add("orden_es_m_id", 0);
+            json.Add("client_id", idClient);
             return json;
         }
 
         private JsonObject LogToJson(SyncLog log)
         {
             JsonObject json = new JsonObject();
-            json.Add("customer_id", log.customer_id);
+            json.Add("client_id", log.client_id);
             json.Add("created_at", log.date_time);
             json.Add("updated_at", log.date_time);
             json.Add("folio", log.folio);

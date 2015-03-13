@@ -20,8 +20,24 @@ namespace AxesoFeng.Forms
         {
             InitializeComponent();
             menu = form;
-            setColors(menu.configData);
             this.type = type;
+            switch ((Global.Version)menu.configData.version)
+            {
+                case Global.Version.ISCAM:
+                    setColors(menu.configData);
+                    break;
+                case Global.Version.INVENTORY_PLACE:
+                case Global.Version.INVENTORY:
+                    InitReadersForm();
+                    FolioBox.Text = "0";
+                    break;
+            }
+        }
+
+        public CaptureFolio(MenuForm form)
+        {
+            InitializeComponent();
+            menu = form;
         }
 
         private void CaptureDataForm_Load(object sender, EventArgs e)
@@ -37,14 +53,17 @@ namespace AxesoFeng.Forms
         private void NextButton_Click(object sender, EventArgs e)
         {
             if (FolioBox.TextLength != 0)
-            {
-                if (type == MenuForm.typeFolio.unloading)
-                    readerUnloading.Show(FolioBox.Text);
-                else
-                    readerLoading.Show(FolioBox.Text);
-            }
+                NextForm();
             else MessageBox.Show("Indique un folio", "Error", 
                 MessageBoxButtons.OK, MessageBoxIcon.Asterisk,MessageBoxDefaultButton.Button1);
+        }
+
+        public void NextForm()
+        {
+            if (type == MenuForm.typeFolio.unloading)
+                readerUnloading.Show(FolioBox.Text);
+            else
+                readerLoading.Show(FolioBox.Text);
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
@@ -53,6 +72,11 @@ namespace AxesoFeng.Forms
         }
 
         private void CaptureFolio_GotFocus(object sender, EventArgs e)
+        {
+            InitReadersForm();
+        }
+
+        private void InitReadersForm()
         {
             if (type == MenuForm.typeFolio.unloading)
             {
@@ -70,5 +94,6 @@ namespace AxesoFeng.Forms
                 this.Hide();
             }
         }
+
     }
 }

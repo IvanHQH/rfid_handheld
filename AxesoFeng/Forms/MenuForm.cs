@@ -25,10 +25,9 @@ namespace AxesoFeng
         public SearchForm search;
         public UPCSearchForm upcsearch;
         public LocateForm locate;
-        //public OrderExitForm orderexit;
         public OrderExitReportForm orderreport;
         public SyncForm formsync;
-        public int idCustomer = 0;
+        public int idClient = 0;
         public bool showCaptureFolio;
 
         //RFID Reader
@@ -36,14 +35,10 @@ namespace AxesoFeng
 
         //Catalogs
         public ProductsList products;
-        //public ProductsList products_bar;
         public Warehouses warehouses;
 
         //Synchronization
         public Sync sync;
-
-        //Current Event Data
-        //public EventData eventdata;
 
         //Configuration
         public Config configData;
@@ -57,11 +52,11 @@ namespace AxesoFeng
             InitializeComponent();
             //Set Config Data
             configData = Config.getConfig(@"\rfiddata\config.json");
-            idCustomer = configData.id_customer;
+            idClient = configData.id_client;
             showCaptureFolio = true;
             //Set Synchronization
-            sync = new Sync(configData.url);
-            //sync.GETTest();
+            sync = new Sync(configData.url,idClient);
+            sync.GETTest();
             //sync.GET();
             //Set Reader
             rrfid = new SimpleRFID();
@@ -71,21 +66,13 @@ namespace AxesoFeng
             //products_bar = new ProductsList(@"\rfiddata\products_bar.csv");
             warehouses = new Warehouses(@"\rfiddata\warehouses.csv");
 
-            //Set Current Event Data
-            //eventdata = EventData.getEventData();
-
             //Set Forms
-            //data = new InventoryForm(this);
-            //data = new CaptureFolio(this);
             reports = new InventoryReportFrm(this);
             search = new SearchForm(this);
             upcsearch = new UPCSearchForm(this);
             locate = new LocateForm(this);
             formsync = new SyncForm(this);
-            //orderexit = new OrderExitForm(this);
             orderreport = new OrderExitReportForm(this);
-            //Sync sync = new Sync(configData.url);
-            //sync.UpdatedDataBase();
             this.setColors(configData);
             /*
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(@"\rfiddata\img\logo.bmp");
@@ -113,8 +100,6 @@ namespace AxesoFeng
             OrderExitReportPicture.Image = image;
             image = new Bitmap(Path.Combine(myResDir, "exit.bmp"));
             ExitPicture.Image = image;
-
-
         }
 
         private void ExitPicture_Click(object sender, EventArgs e)
@@ -124,8 +109,20 @@ namespace AxesoFeng
 
         private void ReaderPicture_Click(object sender, EventArgs e)
         {
-            data = new CaptureFolio(this,MenuForm.typeFolio.unloading);
-            data.Show();
+            if (configData != null)
+            {
+                data = new CaptureFolio(this, MenuForm.typeFolio.unloading);
+                switch ((Global.Version)configData.version)
+                {
+                    case Global.Version.ISCAM:
+                        data.Show();
+                        break;
+                    case Global.Version.INVENTORY_PLACE:
+                    case Global.Version.INVENTORY:
+                        data.NextForm();
+                        break;
+                }                    
+            }
         }
 
         private void ReportPicture_Click(object sender, EventArgs e)
@@ -139,10 +136,8 @@ namespace AxesoFeng
         }
 
         private void SyncPicture_Click(object sender, EventArgs e)
-        {
-            
-            formsync.Show();
-            
+        {            
+            formsync.Show();            
             //if (!sync.GET())
             //    return;
             products = new ProductsList(@"\rfiddata\products.csv");

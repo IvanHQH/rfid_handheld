@@ -10,7 +10,11 @@ namespace AxesoFeng
     public class Config
     {
         public String url { get; set; }
-        public int id_customer { get; set; }
+        public int id_client { get; set; }
+        /// <summary>
+        /// Match with Global.Version ISCAM = 1,INVENTORY = 2,INVENTORY_PLACE = 3
+        /// </summary>
+        public int version { get; set; }
 
         public static Config getConfig(String path){
             StreamReader sreader = new StreamReader(path);

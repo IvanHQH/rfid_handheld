@@ -26,6 +26,7 @@ namespace AxesoFeng
         private void Report_GotFocus(object sender, EventArgs e)
         {
             reportBox.Items.Clear();
+            reportGrid.DataSource = null;
             string[] filePaths = Directory.GetFiles(@"\rfiddata");
             upcFiles = new List<string>();
 
@@ -38,18 +39,26 @@ namespace AxesoFeng
             {
                 comp = path1.Split(new Char[] { '_' });
                 try 
-                { reportBox.Items.Add(comp[3] + " " + 
-                    //Date only whit tens 
-                    Sync.FormatDateTime(comp[4]).Substring(2,comp[4].Length-2)); }
+                {
+                    switch ((Global.Version)menu.configData.version)
+                    {
+                        case Global.Version.ISCAM:
+                            reportBox.Items.Add(comp[3] + " " +
+                                //Date only whit tens 
+                            Sync.FormatDateTime(comp[4]).Substring(2, comp[4].Length - 2));
+                            break;
+                        case Global.Version.INVENTORY_PLACE:
+                        case Global.Version.INVENTORY:
+                            reportBox.Items.Add(Sync.FormatDateTime(comp[4]).Substring(2, comp[4].Length - 2));
+                            break;
+                    }
+                }
                 catch (Exception exc) {
                     MessageBox.Show("Nombre del archivo sin formato correcto", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1);
+                    this.Hide();
                     break;
                 }                
-                //reportBox.Items[0].va
-                //reportBox.Items.Add(DateTime.FromFileTime(
-                //    Convert.ToInt64(path1.Replace(@"\rfiddata\iupc", "").Replace(@".csv", ""))).ToString());
-                //reportBox.Items.Add(Sync.de
             }
         }
 
@@ -61,9 +70,8 @@ namespace AxesoFeng
         private void reportBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ProductTable table = new ProductTable();
-    
-            //String path=@"\rfiddata\iupc"+DateTime.Parse(reportBox.Items[reportBox.SelectedIndex].ToString()).ToFileTime().ToString()+".csv";
-
+            if (reportBox.SelectedIndex == -1)
+                return;
             String path = upcFiles[reportBox.SelectedIndex];
 
             using (CsvFileReader reader = new CsvFileReader(path))
@@ -74,9 +82,7 @@ namespace AxesoFeng
                     table.addRow(rowcsv[0],rowcsv[1],rowcsv[2]);
                 }
             }
-
-            DataView view = new DataView(table);
-            
+            DataView view = new DataView(table);            
             reportGrid.DataSource = view;
             reportGrid.TableStyles.Clear();
             reportGrid.TableStyles.Add(table.getStyle());

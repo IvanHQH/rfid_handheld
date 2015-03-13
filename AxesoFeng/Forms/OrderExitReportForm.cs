@@ -29,41 +29,7 @@ namespace AxesoFeng
 
         private void OrderExitReport_Load(object sender, EventArgs e)
         {
-            ReportBox.Items.Clear();
-            string[] filePaths = Directory.GetFiles(@"\rfiddata");
-            List<string> upcFiles = new List<string>();
 
-            foreach (String path in filePaths)
-            {
-                if (path.StartsWith("\\rfiddata\\oupc"))
-                    upcFiles.Add(path);
-            }
-            ComboboxItem item;
-            string[] comp;
-            foreach (String path1 in upcFiles)
-            {
-                //warehousesId = Convert.ToInt32(path1.Substring(0, path1.IndexOf("upcs")).Replace(@"\rfiddata\wh", ""));
-                //item = new ComboboxItem();
-                //item.Text = menu.warehouses.getById(warehousesId).name + "-" + DateTime.FromFileTime(Convert.ToInt64(path1.Substring(path1.IndexOf("upcs") + 4).Replace(@".csv", ""))).ToString("dd/MM/yy HH:mm");
-                //item.Value = path1;
-                //ReportBox.Items.Add(item);
-                comp = path1.Split(new Char[] { '_' });
-                item = new ComboboxItem();
-                try
-                {
-                    item.Text = comp[3] + " " +
-                            //Date only whit tens 
-                          Sync.FormatDateTime(comp[4]).Substring(2, comp[4].Length - 2);
-                    item.Value = path1;
-                    ReportBox.Items.Add(item);
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show("Nombre del archivo sin formato correcto", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1);
-                    break;
-                }    
-            }
         }
 
         private void ReportBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -95,7 +61,38 @@ namespace AxesoFeng
 
         private void OrderExitReportForm_GotFocus(object sender, EventArgs e)
         {
+            ReportBox.Items.Clear();
+            reportGrid.DataSource = null;
+            string[] filePaths = Directory.GetFiles(@"\rfiddata");
+            List<string> upcFiles = new List<string>();
 
+            foreach (String path in filePaths)
+            {
+                if (path.StartsWith("\\rfiddata\\oupc"))
+                    upcFiles.Add(path);
+            }
+            ComboboxItem item;
+            string[] comp;
+            foreach (String path1 in upcFiles)
+            {
+                comp = path1.Split(new Char[] { '_' });
+                item = new ComboboxItem();
+                try
+                {
+                    item.Text = comp[3] + " " +
+                        //Date only whit tens 
+                          Sync.FormatDateTime(comp[4]).Substring(2, comp[4].Length - 2);
+                    item.Value = path1;
+                    ReportBox.Items.Add(item);
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Nombre del archivo sin formato correcto", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1);
+                    this.Hide();
+                    break;
+                }
+            }
         }
     }
 }

@@ -23,6 +23,15 @@ namespace AxesoFeng
             InitializeComponent();
             menu = form;
             setColors(menu.configData);
+            switch ((Global.Version)menu.configData.version)
+            {
+                case Global.Version.ISCAM:
+                case Global.Version.INVENTORY_PLACE:
+                    break;
+                case Global.Version.INVENTORY:
+                    WarehouseBox.Visible = false;
+                    break;
+            }
         }
 
         private void ExitButton_Click(object sender, EventArgs e)

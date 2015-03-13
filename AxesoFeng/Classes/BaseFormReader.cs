@@ -33,7 +33,7 @@ namespace AxesoFeng.Classes
         {
             Config config = Config.getConfig(@"\rfiddata\config.json");
             ProductTable table = new ProductTable();
-            Sync sync = new Sync(config.url);
+            Sync sync = new Sync(config.url,menu.idClient);
             sync.UpdatedDataBase(menu.rrfid.m_TagTable, menu.products.items);
             foreach (UpcInventory item in menu.rrfid.fillUPCsInventory(menu.products))
             {
