@@ -118,6 +118,56 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pbSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk3CCgAAAAAAADYAAAAoAAAAIwAAABkAAAABABgAAAAAAAAAAAASCwAAEgsAAAAAAAAAAAAA////////
+        ////////////+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5////////////AAAA+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5rtPy8tOu+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn55vn5OWq0MzMzMzMziTMz
+        +fnN+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5ic3yMzNRUTMz8s2J+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5MzOJMzMzMzMziTMz+fnN+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5ic3yMzNRMzMzMzMzUTMz8s2J+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5MzOJMzMzMzMziTMz+fnN+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        ic3yMzNRMzMzMzMzMzMzMzMzUTMz8s2J+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5
+        +fn5+fn5+fn5zfn5MzOJMzMzMzMziTMz+fnN+fn5+fn5+fn5+fn5+fn5+fn5j83yMzNRMzMzMzMzMzMz
+        MzMzMzMzMzMzUTMz8s2J+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5
+        MzOJMzMzMzMziTMz+fnN+fn5+fn5+fn5+fn5+fn5+fn5ruD5MzlqMzMzMzMzPzkzMzk/MzMzMzMzMzMz
+        UTMz8s2J+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5MzOJMzMzMzMziTMz
+        +fnN+fn5+fn5+fn5+fn5+fn5+fn5+fn5ruD5MzlqUTMz8s2Jj83yMzlYMzMzMzMzMzMzUTMz8s2J+fn5
+        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5MzOJMzMzMzMziTMz+fnN+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5weD58tO0+fn5+fn5ic3yMzNRMzMzMzMzMzMzUTMz8s2J+fn5+fn5+fn5+fn5
+        +fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5MzOJMzMzMzMziTMz+fnN+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5ic3yMzNRMzMzMzMzMzMzUTMz8s2J+fn5+fn5+fn5+fn5AAAA+fn5+fn5
+        +fn5+fn5+fn5zfn5MzOJMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzwYNR+fnm+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5ic3yMzNRMzMzMzMzMzMzu305+fns+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5
+        MzOJMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzu31R+fng+fn5+fn5fa7g4Lt9+fn5+fn5+fn5
+        ic3yMzNRMzMzqGo5+fLa+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5MzOJMzMzMzMzMzMz
+        MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzu31R+fngcLTgMzM/UTMz4Lt9+fn5+fn5+fn5j83yqHde+fLa
+        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5MzOJMzMzMzMzMzMzMzMzMzMzMzMzMzMz
+        MzMzMzMzMzMzMzMzMzMzPz85MzM5MzMzMzMzUTMz4Lt9+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5MzOJMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz
+        MzMzMzMzMzMzMzMzMzMzMzMzUTMz4Lt9+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5
+        +fn5+fn5+fn5zfn5MzOJMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz
+        MzMzMzMzMzMzUTMz4Lt9+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5
+        MzOJMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz
+        UTMz4Lt9+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5MzOJMzMzMzMzMzMz
+        MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMziTMz+fnN+fn5
+        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5MzOJMzMzMzMzMzMzMzMziTMz+fnN+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5zfn5MzOJMzMzMzMzMzMzMzMziTMz+fnN+fn5+fn5+fn5+fn5+fn5
+        +fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5MzOJMzMzMzMzMzMzMzMziTMz+fnN+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5zfn5MzOJMzMzMzMzMzMzMzMziTMz+fnN+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5
+        +fn5+fn5+fn5zfn5MzOJMzMzMzMzMzMzMzMziTMz+fnN+fn5+fn5+fn5+fn5zfn5MzOJiTMz+fnNzfn5
+        MzOJMzMzMzMzMzMzOTMz4K5q+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5
+        MzOJMzMzMzMzMzMzMzMziTMz+fnN+fn5+fn5+fn5+fn5zfn5MzOJiTMz+fnNzfn5MzOJMzMzMzMzOTMz
+        4K5q+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5zfn5MzOJMzMzMzMzMzMz
+        MzMziTMz+fnN+fn5+fn5+fn5+fn5zfn5MzOJiTMz+fnNzfn5MzOJMzMzOTMz4K5q+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn55vn5OWq0MzMzMzMzMzMzMzMziTMz+fnN+fn5
+        +fn5+fn5+fn5zfn5MzOJiTMz+fnNzfn5MzOJOTMz4K5q+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA
+</value>
+  </data>
   <data name="pbBack.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk3CCgAAAAAAADYAAAAoAAAAIwAAABkAAAABABgAAAAAAAAAAAASCwAAEgsAAAAAAAAAAAAA////////
@@ -168,63 +218,10 @@
         +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA
 </value>
   </data>
-  <data name="pbNext.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        Qk3CCgAAAAAAADYAAAAoAAAAIwAAABkAAAABABgAAAAAAAAAAAASCwAAEgsAAAAAAAAAAAAA////////
-        ////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////AAAA+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+eba4PL5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn55q5qM1F9tOD5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        5q5qMzMzMzlYicHm+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn55q5qMzMzMzMzMzM/
-        cKja8vn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn55q5qMzMzMzMzMzMzMzMzUX204Pn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn55q5qMzMzMzMzMzMzMzMzMzMzOViPx+z5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn55q5qMzMzMzMzMzMzMzMzMzMzMzMzMz9wqNry+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn58s2PUTMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz
-        MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzNRfbTg+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5
-        +fn5+fn5+fn5+fn55q5qMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz
-        MzMzMzMzMzMzMzMzMzMzMzM5WI/H7Pn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5
-        5q5qMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz
-        MzMzMzMzMzMzP3C05vn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn55q5qMzMzMzMzMzMz
-        MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzP3C0
-        5vn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn55q5qMzMzMzMzMzMzMzMzMzMzMzMzMzMz
-        MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzM5WI/H7Pn5+fn5+fn5+fn5+fn5
-        +fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn58s2PUTMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz
-        MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzNRfbTg+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn55q5qMzMzMzMzMzMz
-        MzMzMzMzMzMzMz9wqNry+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn55q5qMzMzMzMzMzMzMzMzMzMzOViPx+z5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn55q5qMzMzMzMzMzMzMzMzUX204Pn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn55q5qMzMzMzMzMzM/cKja8vn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        5q5qMzMzMzlYicHm+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn55q5qM1F9tOD5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+eba4PL5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA
-</value>
-  </data>
   <metadata name="$this.FormFactorShadowProperty" xml:space="preserve">
     <value>Pocket_PC</value>
   </metadata>
   <metadata name="$this.Skin" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
   </metadata>
 </root>

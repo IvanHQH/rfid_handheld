@@ -107,3 +107,5 @@ C:\Users\Arellano\Desktop\Inventory Handheld\handheld\AxesoFeng\obj\Debug\AxesoF
 C:\Users\Arellano\Desktop\Inventory Handheld\handheld\AxesoFeng\obj\Debug\AxesoFeng.csproj.GenerateResource.Cache
 C:\Users\Arellano\Desktop\Inventory Handheld\handheld\AxesoFeng\obj\Debug\AxesoFeng.exe
 C:\Users\Arellano\Desktop\Inventory Handheld\handheld\AxesoFeng\obj\Debug\AxesoFeng.pdb
+C:\Users\Arellano\Desktop\Inventory Handheld\handheld\AxesoFeng\obj\Debug\AxesoFeng.EditTextForm.resources
+C:\Users\Arellano\Desktop\Inventory Handheld\handheld\AxesoFeng\obj\Debug\AxesoFeng.ListAssetsForm.resources

@@ -24,7 +24,7 @@ namespace AxesoFeng
     public partial class InventoryForm : BaseFormReader
     {
         public delegate void tdelegate();
-        private Image image;
+        private Image image;        
 
         public InventoryForm(MenuForm form)
         {
@@ -39,7 +39,18 @@ namespace AxesoFeng
                 case Global.Version.INVENTORY:
                      WarehouseBox.Visible = false;
                     break;
-            }               
+            }
+            WarehouseBox.Items.Clear();
+            ComboboxItem item;
+            foreach (Warehouse entry in menu.warehouses.collection)
+            {
+                item = new ComboboxItem();
+                item.Text = entry.name;
+                item.Value = entry.id;
+                WarehouseBox.Items.Add(item);
+            }
+            messageForm = new MessageComparison(menu);
+            folioForm = new ListAssetsForm(menu);
         }
 
         private void startReading_Click(object sender, EventArgs e)
@@ -87,15 +98,26 @@ namespace AxesoFeng
 
         private void ReaderForm_GotFocus(object sender, EventArgs e)
         {
-            if (messageForm == null)
-                messageForm = new MessageComparison(menu);
-            if (messageForm.varSave)
+            //if (messageForm == null)
+            //    messageForm = new MessageComparison(menu);
+            if (messageForm.saveDiff == true)
+            {
+                menu.showCaptureFolio = false;
+                messageForm.saveDiff = false;
                 this.Hide();
+            }
+            if (pushComparison == false)
+            {
+                menu.rrfid.clear();
+                reportGrid.DataSource = null;
+            }
+            pushComparison = false;   
+
             menu.rrfid.ReadHandler = delegate(String tag)
             {
                 labelLog.Invoke(new tdelegate(delegate()
                 {
-                    labelLog.Text = "Tag: " + menu.rrfid.m_TagTable.Count.ToString();
+                    labelLog.Text = "Tag:" + menu.rrfid.m_TagTable.Count.ToString();
                 }));
             };
 
@@ -112,16 +134,6 @@ namespace AxesoFeng
                 }));
             };
 
-            WarehouseBox.Items.Clear();
-            ComboboxItem item;
-            foreach (Warehouse entry in menu.warehouses.collection)
-            {
-                item = new ComboboxItem();
-                item.Text = entry.name;
-                item.Value = entry.id;
-                WarehouseBox.Items.Add(item);
-            }
-
             menu.rrfid.isTriggerActive = true;
         }
 
@@ -132,6 +144,7 @@ namespace AxesoFeng
 
         private void Comparar_Click(object sender, EventArgs e)
         {
+            pushComparison = true;
             switch ((Global.Version)menu.configData.version)
             {
                 case Global.Version.ISCAM:
@@ -144,7 +157,16 @@ namespace AxesoFeng
                 case Global.Version.INVENTORY:
                     CompareTo("0", 1);
                     break;
-            }                
+            }
+            if (CompSuccesfull)
+            {
+                this.Hide();
+            }        
+        }
+
+        private void pbFolio_Click(object sender, EventArgs e)
+        {
+            folioForm.Show();
         }
 
     }

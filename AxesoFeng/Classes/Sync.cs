@@ -114,7 +114,6 @@ namespace AxesoFeng
             var request = new RestRequest("test_conection", Method.GET);
             IRestResponse response = client.Execute(request);
             String text = response.Content;
-
             if (!requestError(response.StatusCode.ToString()))
                 return false;
             return true;

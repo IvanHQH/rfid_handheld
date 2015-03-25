@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -30,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UPCSearchForm));
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.label1 = new System.Windows.Forms.Label();
             this.ProductLabel = new System.Windows.Forms.Label();
             this.UPCLabel = new System.Windows.Forms.Label();
@@ -82,7 +80,7 @@
             // TagsLabel
             // 
             this.TagsLabel.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.TagsLabel.Location = new System.Drawing.Point(126, 163);
+            this.TagsLabel.Location = new System.Drawing.Point(125, 173);
             this.TagsLabel.Name = "TagsLabel";
             this.TagsLabel.Size = new System.Drawing.Size(100, 20);
             this.TagsLabel.Text = "Tags: 0";
@@ -90,7 +88,7 @@
             // pbBack
             // 
             this.pbBack.Image = ((System.Drawing.Image)(resources.GetObject("pbBack.Image")));
-            this.pbBack.Location = new System.Drawing.Point(4, 158);
+            this.pbBack.Location = new System.Drawing.Point(3, 168);
             this.pbBack.Name = "pbBack";
             this.pbBack.Size = new System.Drawing.Size(35, 25);
             this.pbBack.Click += new System.EventHandler(this.ExitButton_Click);
@@ -98,7 +96,7 @@
             // pbSave
             // 
             this.pbSave.Image = ((System.Drawing.Image)(resources.GetObject("pbSave.Image")));
-            this.pbSave.Location = new System.Drawing.Point(45, 158);
+            this.pbSave.Location = new System.Drawing.Point(44, 168);
             this.pbSave.Name = "pbSave";
             this.pbSave.Size = new System.Drawing.Size(35, 25);
             this.pbSave.Click += new System.EventHandler(this.SaveButton_Click);
@@ -108,7 +106,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(240, 268);
+            this.ClientSize = new System.Drawing.Size(240, 294);
             this.Controls.Add(this.pbSave);
             this.Controls.Add(this.pbBack);
             this.Controls.Add(this.TagsLabel);
@@ -117,7 +115,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ProductLabel);
             this.Controls.Add(this.label1);
-            this.Menu = this.mainMenu1;
             this.Name = "UPCSearchForm";
             this.Text = "Detalle";
             this.GotFocus += new System.EventHandler(this.UPCSearchForm_GotFocus);

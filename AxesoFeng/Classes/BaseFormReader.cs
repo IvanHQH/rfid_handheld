@@ -15,13 +15,17 @@ namespace AxesoFeng.Classes
         protected enum IndexDataView { name = 1, quantity = 2 }
         protected DataView dataView;
         protected MessageComparison messageForm;
+        protected ListAssetsForm folioForm;
         protected MenuForm menu;
         protected String folio;
-
-        public BaseFormReader()
+        private bool comparisonSuccesfull;
+        protected bool pushComparison;
+        protected bool CompSuccesfull
         {
+            get { return comparisonSuccesfull; }
         }
 
+        public BaseFormReader(){}
 
         public void Show(String folio)
         {
@@ -51,7 +55,7 @@ namespace AxesoFeng.Classes
             {
                 messageForm.fillMessages(messages,valueWarehouse,this.folio,Type);
                 messageForm.Show();
-                return messageForm.varSave;
+                return messageForm.saveDiff;
             }
             return false;
         }
@@ -78,11 +82,13 @@ namespace AxesoFeng.Classes
             List<string> messages = new List<string>();
             List<RespFolio.Products> productsRead = ProductsRead();
             messages = folio.CompareTo(productsRead, this.folio);
+            comparisonSuccesfull = false;
             if (messages.Count == 0)
             {
                 if (MessageBox.Show("¿Desea guardar la lectura?", "OK", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-                    messageForm.Save(valueWarehouse, this.folio);                    
+                    messageForm.Save(valueWarehouse, this.folio,type);
+                comparisonSuccesfull = true; 
             }
             else
                 ShowMessages(messages, valueWarehouse,type);

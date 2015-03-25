@@ -27,6 +27,7 @@ namespace AxesoFeng
         public LocateForm locate;
         public OrderExitReportForm orderreport;
         public SyncForm formsync;
+        private EditTextForm frmEditText;
         public int idClient = 0;
         public bool showCaptureFolio;
 
@@ -73,6 +74,7 @@ namespace AxesoFeng
             locate = new LocateForm(this);
             formsync = new SyncForm(this);
             orderreport = new OrderExitReportForm(this);
+            frmEditText = new EditTextForm(this, @"\rfiddata\config.json");
             this.setColors(configData);
             /*
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(@"\rfiddata\img\logo.bmp");
@@ -98,8 +100,8 @@ namespace AxesoFeng
             OrderExitPicture.Image = image;
             image = new Bitmap(Path.Combine(myResDir, "menu6.bmp"));
             OrderExitReportPicture.Image = image;
-            image = new Bitmap(Path.Combine(myResDir, "exit.bmp"));
-            ExitPicture.Image = image;
+            //image = new Bitmap(Path.Combine(myResDir, "exit.bmp"));
+            //ExitPicture.Image = image;
         }
 
         private void ExitPicture_Click(object sender, EventArgs e)
@@ -165,6 +167,17 @@ namespace AxesoFeng
             if (MessageBox.Show("¿Está seguro de eliminar todas las lecturas?", "Confirmación", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             FolioOrder.DeleteFiles();
+        }
+
+        private void pbEdit_Click(object sender, EventArgs e)
+        {
+            frmEditText.Show();
+        }
+
+        private void MenuForm_GotFocus(object sender, EventArgs e)
+        {
+            try { if (frmEditText.Restart)Application.Exit(); }
+            catch (Exception exc) { } 
         }
 
     }

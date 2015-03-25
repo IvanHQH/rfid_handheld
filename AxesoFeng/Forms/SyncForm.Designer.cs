@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -29,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.label1 = new System.Windows.Forms.Label();
             this.InventoryLabel = new System.Windows.Forms.Label();
             this.OrderLabel = new System.Windows.Forms.Label();
@@ -64,11 +62,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(240, 268);
+            this.ClientSize = new System.Drawing.Size(240, 294);
             this.Controls.Add(this.OrderLabel);
             this.Controls.Add(this.InventoryLabel);
             this.Controls.Add(this.label1);
-            this.Menu = this.mainMenu1;
             this.Name = "SyncForm";
             this.Text = "Sincronizando";
             this.ResumeLayout(false);

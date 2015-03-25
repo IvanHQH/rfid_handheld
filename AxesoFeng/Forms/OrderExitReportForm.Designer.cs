@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -30,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderExitReportForm));
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.ReportBox = new System.Windows.Forms.ComboBox();
             this.reportGrid = new System.Windows.Forms.DataGrid();
             this.pbBack = new System.Windows.Forms.PictureBox();
@@ -49,14 +47,14 @@
             this.reportGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.reportGrid.Location = new System.Drawing.Point(4, 32);
             this.reportGrid.Name = "reportGrid";
-            this.reportGrid.Size = new System.Drawing.Size(220, 126);
+            this.reportGrid.Size = new System.Drawing.Size(220, 153);
             this.reportGrid.TabIndex = 2;
             this.reportGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.reportGrid_MouseDown);
             // 
             // pbBack
             // 
             this.pbBack.Image = ((System.Drawing.Image)(resources.GetObject("pbBack.Image")));
-            this.pbBack.Location = new System.Drawing.Point(4, 164);
+            this.pbBack.Location = new System.Drawing.Point(4, 191);
             this.pbBack.Name = "pbBack";
             this.pbBack.Size = new System.Drawing.Size(35, 25);
             this.pbBack.Click += new System.EventHandler(this.ExitButton_Click);
@@ -66,11 +64,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(240, 268);
+            this.ClientSize = new System.Drawing.Size(240, 294);
             this.Controls.Add(this.pbBack);
             this.Controls.Add(this.reportGrid);
             this.Controls.Add(this.ReportBox);
-            this.Menu = this.mainMenu1;
             this.Name = "OrderExitReportForm";
             this.Text = "Reporte de Salida";
             this.Load += new System.EventHandler(this.OrderExitReport_Load);

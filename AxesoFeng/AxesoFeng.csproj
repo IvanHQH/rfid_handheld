@@ -70,7 +70,7 @@
     <Compile Include="Classes\BaseFormReader.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Classes\Folio.cs" />
+    <Compile Include="Classes\FolioOrder.cs" />
     <Compile Include="Classes\Global.cs" />
     <Compile Include="Classes\RespFolio.cs" />
     <Compile Include="Classes\Warehouses.cs" />
@@ -80,11 +80,23 @@
     <Compile Include="Classes\ComboboxItem.cs" />
     <Compile Include="Classes\Config.cs" />
     <Compile Include="Classes\ProductsList.cs" />
+    <Compile Include="Forms\EditTextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditTextForm.designer.cs">
+      <DependentUpon>EditTextForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CaptureFolio.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\CaptureFolio.Designer.cs">
       <DependentUpon>CaptureFolio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ListAssetsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ListAssetsForm.Designer.cs">
+      <DependentUpon>ListAssetsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\LocateForm.cs">
       <SubType>Form</SubType>
@@ -126,8 +138,16 @@
     <Compile Include="ProductTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\EditTextForm.resx">
+      <DependentUpon>EditTextForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CaptureFolio.resx">
       <DependentUpon>CaptureFolio.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ListAssetsForm.resx">
+      <DependentUpon>ListAssetsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LocateForm.resx">

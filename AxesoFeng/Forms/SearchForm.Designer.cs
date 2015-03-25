@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -30,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForm));
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.productBox = new System.Windows.Forms.ComboBox();
             this.EPCBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,9 +47,9 @@
             // 
             // EPCBox
             // 
-            this.EPCBox.Location = new System.Drawing.Point(71, 56);
+            this.EPCBox.Location = new System.Drawing.Point(4, 80);
             this.EPCBox.Name = "EPCBox";
-            this.EPCBox.Size = new System.Drawing.Size(166, 21);
+            this.EPCBox.Size = new System.Drawing.Size(233, 21);
             this.EPCBox.TabIndex = 2;
             // 
             // label1
@@ -71,7 +69,7 @@
             // pbBack
             // 
             this.pbBack.Image = ((System.Drawing.Image)(resources.GetObject("pbBack.Image")));
-            this.pbBack.Location = new System.Drawing.Point(7, 83);
+            this.pbBack.Location = new System.Drawing.Point(4, 107);
             this.pbBack.Name = "pbBack";
             this.pbBack.Size = new System.Drawing.Size(35, 25);
             this.pbBack.Click += new System.EventHandler(this.ExitButton_Click);
@@ -79,7 +77,7 @@
             // pbSearch
             // 
             this.pbSearch.Image = ((System.Drawing.Image)(resources.GetObject("pbSearch.Image")));
-            this.pbSearch.Location = new System.Drawing.Point(48, 83);
+            this.pbSearch.Location = new System.Drawing.Point(45, 107);
             this.pbSearch.Name = "pbSearch";
             this.pbSearch.Size = new System.Drawing.Size(35, 25);
             this.pbSearch.Click += new System.EventHandler(this.SearchEPCButton_Click);
@@ -89,14 +87,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(240, 268);
+            this.ClientSize = new System.Drawing.Size(240, 294);
             this.Controls.Add(this.pbSearch);
             this.Controls.Add(this.pbBack);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.EPCBox);
             this.Controls.Add(this.productBox);
-            this.Menu = this.mainMenu1;
             this.Name = "SearchForm";
             this.Text = "Buscar";
             this.GotFocus += new System.EventHandler(this.SearchForm_GotFocus);

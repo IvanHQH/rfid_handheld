@@ -63,7 +63,10 @@ namespace AxesoFeng
                 m_ReaderAPI.Events.StatusNotify += new Events.StatusNotifyHandler(Events_StatusNotify);
                 m_ReaderAPI.Events.ReadNotify += new Events.ReadNotifyHandler(Events_ReadNotify);
             }
-            catch (Exception exc) {
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error conexión localhost", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
                 Application.Exit();
             }
         }

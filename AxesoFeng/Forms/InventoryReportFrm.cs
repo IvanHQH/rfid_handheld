@@ -85,8 +85,7 @@ namespace AxesoFeng
             DataView view = new DataView(table);            
             reportGrid.DataSource = view;
             reportGrid.TableStyles.Clear();
-            reportGrid.TableStyles.Add(table.getStyle());
-            
+            reportGrid.TableStyles.Add(table.getStyle());            
         }
 
         private void reportGrid_MouseDown(object sender, MouseEventArgs e)

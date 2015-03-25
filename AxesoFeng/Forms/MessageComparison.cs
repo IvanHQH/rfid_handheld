@@ -18,12 +18,7 @@ namespace AxesoFeng.Forms
         private String folio;
         private String valueWarehouse;
         private int type;
-        private bool _save;
-
-        public bool varSave 
-        {
-            get { return _save; }
-        }
+        public bool saveDiff;
 
         public MessageComparison(MenuForm form)
         {            
@@ -68,14 +63,14 @@ namespace AxesoFeng.Forms
 
         private void SaveButton_Click(object sender, EventArgs e)
         { 
-            Save(valueWarehouse,folio);
+            Save(valueWarehouse,folio,this.type);
         }
 
-        public void Save(String valueWarehouse,String folio)
+        public void Save(String valueWarehouse,String folio,int type)
         {
             this.valueWarehouse = valueWarehouse;
             this.folio = folio;
-
+            this.type = type;
             menu.rrfid.stop();
             labelLog.Text = "Guardando";
             String folder = "\\rfiddata";
@@ -91,27 +86,26 @@ namespace AxesoFeng.Forms
             SaveMessage(folder, path);
             labelLog.Text = "";
             MessageBox.Show("Orden guardada");
-            menu.showCaptureFolio = false;
-            _save = true;
+            menu.showCaptureFolio = false;            
             this.Hide();
         }
 
         private void SaveMessage(string folder, string path)
         {
             Directory.CreateDirectory(folder);
-
             using (CsvFileWriter writer = new CsvFileWriter(path))
             {
-                //foreach (UpcInventory item in reader.fillUPCsInventory(this))
                 if (messagesListview.Items.Count != 0)
                 {
-                    foreach (ListViewItem item in messagesListview.Items)
-                    {
+                    foreach (ListViewItem item in messagesListview.Items){
                         writer.WriteLine(item.Text + ",");
                     }
+                    saveDiff = true;
                 }
-                else
+                else{
                     writer.WriteLine("lectura existosa");
+                    saveDiff = true;
+                }
             }
         }
 
@@ -141,7 +135,7 @@ namespace AxesoFeng.Forms
 
         private void MessageComparison_GotFocus(object sender, EventArgs e)
         {
-            _save = false;
+            
         }
     }
 }

@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -30,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaptureFolio));
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.folioLbl = new System.Windows.Forms.Label();
             this.FolioBox = new System.Windows.Forms.TextBox();
             this.pbBack = new System.Windows.Forms.PictureBox();
@@ -72,12 +70,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(240, 268);
+            this.ClientSize = new System.Drawing.Size(240, 294);
             this.Controls.Add(this.pbNext);
             this.Controls.Add(this.pbBack);
             this.Controls.Add(this.folioLbl);
             this.Controls.Add(this.FolioBox);
-            this.Menu = this.mainMenu1;
             this.Name = "CaptureFolio";
             this.Text = "Captura Folio";
             this.Load += new System.EventHandler(this.CaptureDataForm_Load);
