@@ -63,12 +63,12 @@ namespace AxesoFeng
         {
             ReportBox.Items.Clear();
             reportGrid.DataSource = null;
-            string[] filePaths = Directory.GetFiles(@"\rfiddata");
+            string[] filePaths = Directory.GetFiles(menu.pathFolderName);
             List<string> upcFiles = new List<string>();
 
             foreach (String path in filePaths)
             {
-                if (path.StartsWith("\\rfiddata\\oupc"))
+                if (path.StartsWith(menu.pathFolderName + "oupc"))
                     upcFiles.Add(path);
             }
             ComboboxItem item;

@@ -148,10 +148,10 @@ namespace AxesoFeng
             }
         }
 
-        public static void DeleteFiles()
+        public static void DeleteFiles(String pathFolderName)
         {
             Cursor.Current = Cursors.WaitCursor;
-            string[] filePaths = Directory.GetFiles(@"\rfiddata");
+            string[] filePaths = Directory.GetFiles(pathFolderName);
 
             foreach (String path in filePaths)
             {

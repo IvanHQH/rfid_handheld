@@ -20,6 +20,8 @@ namespace AxesoFeng
 
         private int idClient;
 
+        private String pathFolderName;
+
         private class GetObject {
             public List<SyncProduct> products { get; set; }
             public List<SyncWarehouse> warehouses { get; set; }
@@ -103,10 +105,11 @@ namespace AxesoFeng
             public String folio;
         }
 
-        public Sync(String BaseUrl,int idClient)
+        public Sync(String BaseUrl, int idClient, String pathFolderName)
         {
             client = new RestClient(BaseUrl);
             this.idClient = idClient;
+            this.pathFolderName = pathFolderName;
         }
 
         public bool GETTest()
@@ -121,16 +124,22 @@ namespace AxesoFeng
 
         public bool GET()
         {
-            var request = new RestRequest("sync", Method.GET);
+            var request = new RestRequest("sync_data", Method.POST);
+            JsonObject json = new JsonObject();
+
+            request.RequestFormat = DataFormat.Json;
+            json.Add("pclient_id",idClient.ToString());
+            request.AddBody(json);
+
             IRestResponse<GetObject> response = client.Execute<GetObject>(request);
             GetObject data = response.Data;
 
             if (!requestError(response.StatusCode.ToString()))
                 return false;
 
-            Directory.CreateDirectory(@"\rfiddata");
+            Directory.CreateDirectory(pathFolderName);
 
-            using (CsvFileWriter writer = new CsvFileWriter(@"\rfiddata\productsrfid.csv"))
+            using (CsvFileWriter writer = new CsvFileWriter(pathFolderName + "products.csv"))
             {                
                 foreach (SyncProduct item in data.products)
                 {
@@ -141,7 +150,7 @@ namespace AxesoFeng
                 }
             }
 
-            using (CsvFileWriter writer = new CsvFileWriter(@"\rfiddata\warehouses.csv"))
+            using (CsvFileWriter writer = new CsvFileWriter(pathFolderName + "warehouses.csv"))
             {
                 foreach (SyncWarehouse item in data.warehouses)
                 {
@@ -157,8 +166,8 @@ namespace AxesoFeng
         public bool POST(SyncForm sync)
         {
             Cursor.Current = Cursors.WaitCursor;
-            Directory.CreateDirectory(@"\rfiddataold");
-            string[] filePaths = Directory.GetFiles(@"\rfiddata");
+            Directory.CreateDirectory(pathFolderName);
+            string[] filePaths = Directory.GetFiles(pathFolderName);
             List<string> upcFiles = new List<string>();
             List<string> invetories = new List<string>();
             List<string> orderExists = new List<string>();
@@ -283,7 +292,7 @@ namespace AxesoFeng
                 orden = new SyncOrdenEsM(int.Parse(comp[(int)SyncOrdenEsM.index.client_id]),
                     FormatDateTime(comp[(int)SyncOrdenEsM.index.date_time].Replace(".csv","")),
                     comp[(int)SyncOrdenEsM.index.folio],
-                    Type(comp[0].Replace("\\rfiddata\\","")[0]),
+                    Type(comp[0].Replace(pathFolderName, "")[0]),
                     int.Parse(comp[(int)SyncOrdenEsM.index.warehouse_id]));
             }
             catch (Exception exc) { }
@@ -301,7 +310,8 @@ namespace AxesoFeng
                 log.client_id = int.Parse(comp[(int)SyncOrdenEsM.index.client_id]);
                 log.date_time = FormatDateTime(comp[(int)SyncOrdenEsM.index.date_time].Replace(".csv", ""));
                 log.folio = comp[(int)SyncOrdenEsM.index.folio];
-                log.type = Type(comp[0].Replace("\\rfiddata\\", "")[0]);
+                //log.type = Type(comp[0].Replace("\\rfiddata\\", "")[0]);
+                log.type = Type(comp[0].Replace("\\"+pathFolderName, "")[0]);
                 log.user_id = 1;
                 log.description = ContentFile(path);
             }
@@ -405,7 +415,7 @@ namespace AxesoFeng
 
         private bool AddProductDataBase(SyncProduct product)
         {
-            using (CsvFileWriter writer = new CsvFileWriter(@"\rfiddata\productsrfid.csv"))
+            using (CsvFileWriter writer = new CsvFileWriter(pathFolderName + "productsrfid.csv"))
             {
                 CsvRow row = new CsvRow();
                 row.Add(product.upc);

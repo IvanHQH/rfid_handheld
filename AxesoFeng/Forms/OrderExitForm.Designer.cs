@@ -65,7 +65,7 @@
             // pbCompare
             // 
             this.pbCompare.Image = ((System.Drawing.Image)(resources.GetObject("pbCompare.Image")));
-            this.pbCompare.Location = new System.Drawing.Point(109, 192);
+            this.pbCompare.Location = new System.Drawing.Point(144, 192);
             this.pbCompare.Name = "pbCompare";
             this.pbCompare.Size = new System.Drawing.Size(35, 25);
             this.pbCompare.Click += new System.EventHandler(this.compararButton_Click);
@@ -97,7 +97,7 @@
             // pbFolio
             // 
             this.pbFolio.Image = ((System.Drawing.Image)(resources.GetObject("pbFolio.Image")));
-            this.pbFolio.Location = new System.Drawing.Point(144, 192);
+            this.pbFolio.Location = new System.Drawing.Point(109, 192);
             this.pbFolio.Name = "pbFolio";
             this.pbFolio.Size = new System.Drawing.Size(35, 25);
             this.pbFolio.Click += new System.EventHandler(this.pbFolio_Click);

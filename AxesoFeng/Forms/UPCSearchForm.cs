@@ -15,11 +15,14 @@ namespace AxesoFeng
         public delegate void tdelegate();
         public delegate String tdelegate1();
         private MenuForm menu;
-        public UPCSearchForm(MenuForm form)
+        private String pathFolderName;
+
+        public UPCSearchForm(MenuForm form, String pathFolderName)
         {
             InitializeComponent();
             menu = form;
             setColors(menu.configData);
+            this.pathFolderName = pathFolderName;
         }
 
         public void fillProduct(String upc,String product)
@@ -79,9 +82,9 @@ namespace AxesoFeng
         private void SaveButton_Click(object sender, EventArgs e)
         {
             menu.rrfid.stop();
-            String folder = @"\rfiddata";
+            String folder = pathFolderName;
             String timestamp = DateTime.Now.ToFileTime().ToString();
-            String pathepc = @"\rfiddata\prod"+ UPCLabel.Text + "t" + timestamp + ".csv";
+            String pathepc = pathFolderName + "prod" + UPCLabel.Text + "t" + timestamp + ".csv";
             menu.products.saveEPCs(menu.rrfid, folder, pathepc);
             menu.rrfid.clear();
             MessageBox.Show("Se guardaron los epcs del producto con exito","Detalle");

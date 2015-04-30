@@ -48,33 +48,35 @@ namespace AxesoFeng
 
         public enum typeFolio { loading = 1,unloading = 2}
 
+        public String pathFolderName;
+
         public MenuForm()
         {
             InitializeComponent();
             //Set Config Data
-            configData = Config.getConfig(@"\rfiddata\config.json");
+            pathFolderName = getNameFolderVersion();
+            configData = Config.getConfig(pathFolderName + "config.json");
             idClient = configData.id_client;
             showCaptureFolio = true;
             //Set Synchronization
-            sync = new Sync(configData.url,idClient);
-            sync.GETTest();
-            //sync.GET();
+            sync = new Sync(configData.url,idClient,pathFolderName);
+            //sync.GETTest();
+            sync.GET();
             //Set Reader
             rrfid = new SimpleRFID();
             //rrfid.changeEPC("30342848A80A5AC0000007D9", "30342848A80A5A400001000A");
             //Set Catalogs
-            products = new ProductsList(@"\rfiddata\products.csv");
-            //products_bar = new ProductsList(@"\rfiddata\products_bar.csv");
-            warehouses = new Warehouses(@"\rfiddata\warehouses.csv");
+            products = new ProductsList(pathFolderName + "products.csv");
+            warehouses = new Warehouses(pathFolderName + "warehouses.csv");
 
             //Set Forms
             reports = new InventoryReportFrm(this);
             search = new SearchForm(this);
-            upcsearch = new UPCSearchForm(this);
+            upcsearch = new UPCSearchForm(this,pathFolderName);
             locate = new LocateForm(this);
             formsync = new SyncForm(this);
             orderreport = new OrderExitReportForm(this);
-            frmEditText = new EditTextForm(this, @"\rfiddata\config.json");
+            frmEditText = new EditTextForm(this, pathFolderName + "config.json");
             this.setColors(configData);
             /*
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(@"\rfiddata\img\logo.bmp");
@@ -83,7 +85,7 @@ namespace AxesoFeng
               */
 
             string myDir = Path.GetDirectoryName(Assembly.GetCallingAssembly().GetName().CodeBase);
-            myResDir = Path.Combine(myDir, @"\rfiddata\img");
+            myResDir = Path.Combine(myDir, pathFolderName + "img");
             Image image;
             
             image = new Bitmap(Path.Combine(myResDir, "logo_hqh_med.bmp"));
@@ -102,6 +104,11 @@ namespace AxesoFeng
             OrderExitReportPicture.Image = image;
             //image = new Bitmap(Path.Combine(myResDir, "exit.bmp"));
             //ExitPicture.Image = image;
+        }
+
+        private string getNameFolderVersion()
+        {
+            return @"\rfiddata\FOLIO\";
         }
 
         private void ExitPicture_Click(object sender, EventArgs e)
@@ -142,9 +149,9 @@ namespace AxesoFeng
             formsync.Show();            
             //if (!sync.GET())
             //    return;
-            products = new ProductsList(@"\rfiddata\products.csv");
+            products = new ProductsList(pathFolderName + "products.csv");
             //products_bar = new ProductsList(@"\rfiddata\products_bar.csv");
-            warehouses = new Warehouses(@"\rfiddata\warehouses.csv");
+            warehouses = new Warehouses(pathFolderName + "warehouses.csv");
             if (sync.POST(formsync))
                 MessageBox.Show("Sincronización exitosa", "Sincronización");
             formsync.Hide();
@@ -166,7 +173,7 @@ namespace AxesoFeng
         {
             if (MessageBox.Show("¿Está seguro de eliminar todas las lecturas?", "Confirmación", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-            FolioOrder.DeleteFiles();
+            FolioOrder.DeleteFiles(pathFolderName);
         }
 
         private void pbEdit_Click(object sender, EventArgs e)

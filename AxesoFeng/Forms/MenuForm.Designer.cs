@@ -130,7 +130,7 @@
             this.Controls.Add(this.ReportPicture);
             this.Controls.Add(this.ReaderPicture);
             this.Name = "MenuForm";
-            this.Text = "Menu";
+            this.Text = "Menu1";
             this.GotFocus += new System.EventHandler(this.MenuForm_GotFocus);
             this.ResumeLayout(false);
 

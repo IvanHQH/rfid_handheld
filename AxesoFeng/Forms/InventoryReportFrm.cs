@@ -27,11 +27,11 @@ namespace AxesoFeng
         {
             reportBox.Items.Clear();
             reportGrid.DataSource = null;
-            string[] filePaths = Directory.GetFiles(@"\rfiddata");
+            string[] filePaths = Directory.GetFiles(menu.pathFolderName);
             upcFiles = new List<string>();
 
             foreach (String path in filePaths){
-                if (path.StartsWith("\\rfiddata\\iupc"))
+                if (path.StartsWith(menu.pathFolderName + "iupc"))
                     upcFiles.Add(path);
             }
             string[] comp;

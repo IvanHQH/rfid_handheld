@@ -73,7 +73,7 @@ namespace AxesoFeng.Forms
             this.type = type;
             menu.rrfid.stop();
             labelLog.Text = "Guardando";
-            String folder = "\\rfiddata";
+            String folder = menu.pathFolderName;
             String path;
             DateTime timestamp = DateTime.Now;
             path = NameFile(TypeFile.epc, valueWarehouse,timestamp,false);
@@ -111,20 +111,20 @@ namespace AxesoFeng.Forms
 
         protected String NameFile(TypeFile Type, String valueWarehouse,DateTime timestamp,Boolean message)
         {
-            
+
             String dataName = menu.idClient.ToString();
             dataName += "_" + valueWarehouse;//(WarehouseBox.SelectedItem as ComboboxItem).Value.ToString();
             dataName += "_" + folio;
             dataName += "_" + FormatDateTime(timestamp);
             String path;
             if (message)
-                path = "\\rfiddata\\message_" + dataName + ".csv";
+                path = menu.pathFolderName + "message_" + dataName + ".csv";
             else
             {
                 if(this.type == 1)
-                    path = "\\rfiddata\\i";
+                    path = menu.pathFolderName + "i";
                 else
-                    path = "\\rfiddata\\o";
+                    path = menu.pathFolderName + "o";
                 if (TypeFile.epc == Type)
                     path += "epcs_" + dataName + ".csv";
                 else
