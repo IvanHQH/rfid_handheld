@@ -60,8 +60,9 @@ namespace AxesoFeng
             showCaptureFolio = true;
             //Set Synchronization
             sync = new Sync(configData.url,idClient,pathFolderName);
-            //sync.GETTest();
-            sync.GET();
+            sync.conection = sync.GETTest();
+            if(sync.conection)
+                sync.GET();
             //Set Reader
             rrfid = new SimpleRFID();
             //rrfid.changeEPC("30342848A80A5AC0000007D9", "30342848A80A5A400001000A");
@@ -152,7 +153,7 @@ namespace AxesoFeng
             products = new ProductsList(pathFolderName + "products.csv");
             //products_bar = new ProductsList(@"\rfiddata\products_bar.csv");
             warehouses = new Warehouses(pathFolderName + "warehouses.csv");
-            if (sync.POST(formsync))
+            if (sync.POSTTrans(formsync, configData.id_user, configData.pwd, configData.id_client))
                 MessageBox.Show("Sincronización exitosa", "Sincronización");
             formsync.Hide();
         }

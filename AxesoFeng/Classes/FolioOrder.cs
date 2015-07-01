@@ -76,14 +76,14 @@ namespace AxesoFeng
                     if (prodResp.name == prodFile.name) {
                         find = true;
                         if (prodResp.quantity != prodFile.quantity){                            
-                            Inequalities.Add("hay " + prodFile.quantity.ToString()+ 
-                                " de " +prodResp.name+ " se esperaban " + prodResp.quantity);
+                            Inequalities.Add(prodFile.quantity.ToString()+ 
+                                " de " +prodResp.name+ " "+prodResp.quantity + " esperados");
                             break;
                         }
                     }
                 }
                 if (find == false)
-                    Inequalities.Add(prodResp.name + " no se encuentra");
+                    Inequalities.Add(prodResp.name + " Inexistente");
             }
             foreach (RespFolio.Products prodFile in productsFile)
             {
@@ -92,12 +92,11 @@ namespace AxesoFeng
                 {
                     if (prodResp.name == prodFile.name){
                         find = true;
-                        break;
-                        //if (prodResp.quantity != prodFile.quantity){}
+                        break;                        
                     }
                 }
                 if (find == false)
-                    Inequalities.Add(prodFile.name + " no se esperaba");
+                    Inequalities.Add(prodFile.name + " Excedente");
             }
             return Inequalities;
         }
@@ -117,13 +116,17 @@ namespace AxesoFeng
 
         public RespFolio GETServer(string folio)
         {
-            var request = new RestRequest("test_get_folio", Method.POST);
-            request.AddParameter("folio", folio);
-            IRestResponse<RespFolio> response = client.Execute<RespFolio>(request);
-            RespFolio data = JsonConvert.DeserializeObject<RespFolio>(response.Content);
-
-            if (!requestError(response.StatusCode.ToString()))
-                return null;
+            //var request = new RestRequest("test_get_folio", Method.POST);
+            //request.AddParameter("folio", folio);
+            //IRestResponse<RespFolio> response = client.Execute<RespFolio>(request);
+            //RespFolio data = JsonConvert.DeserializeObject<RespFolio>(response.Content);
+            //Equipo\GRUPO HQH\\\rfiddata\FOLIO
+            StreamReader sreader = new StreamReader(@"\rfiddata\FOLIO\folio.json");
+            String json = sreader.ReadToEnd();
+            sreader.Close();
+            RespFolio data = JsonConvert.DeserializeObject<RespFolio>(json);
+            //if (!requestError(response.StatusCode.ToString()))
+            //    return null;
 
             return data;
         }

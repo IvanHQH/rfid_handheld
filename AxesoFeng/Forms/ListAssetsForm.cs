@@ -13,6 +13,7 @@ namespace AxesoFeng
 {
     public partial class ListAssetsForm : BaseFormReader
     {
+
         public ListAssetsForm(MenuForm form)
         {
             InitializeComponent();
@@ -27,17 +28,20 @@ namespace AxesoFeng
 
         private void ListAssetsForm_GotFocus(object sender, EventArgs e)
         {
-            ProductTable table = new ProductTable();
-            FolioOrder folio = new FolioOrder(menu.configData.url);
-            RespFolio respFolio = folio.GETServer(this.folio);
-            foreach (RespFolio.Products prod in respFolio.products)
+            //if (menu.sync.conection)
             {
-                table.addRow(prod.upc,prod.name,prod.quantity.ToString());
+                ProductTable table = new ProductTable();
+                FolioOrder folio = new FolioOrder(menu.configData.url);
+                RespFolio respFolio = folio.GETServer(this.folio);
+                foreach (RespFolio.Products prod in respFolio.products)
+                {
+                    table.addRow(prod.upc, prod.name, prod.quantity.ToString());
+                }
+                DataView view = new DataView(table);
+                reportGrid.DataSource = view;
+                reportGrid.TableStyles.Clear();
+                reportGrid.TableStyles.Add(table.getStyle());
             }
-            DataView view = new DataView(table);
-            reportGrid.DataSource = view;
-            reportGrid.TableStyles.Clear();
-            reportGrid.TableStyles.Add(table.getStyle());  
         }
 
         private void ExitButton_Click(object sender, EventArgs e)

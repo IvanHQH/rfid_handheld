@@ -47,7 +47,7 @@
             this.InventoryLabel.Location = new System.Drawing.Point(12, 41);
             this.InventoryLabel.Name = "InventoryLabel";
             this.InventoryLabel.Size = new System.Drawing.Size(206, 29);
-            this.InventoryLabel.Text = "0 Inventarios";
+            this.InventoryLabel.Text = "0 Entradas";
             // 
             // OrderLabel
             // 

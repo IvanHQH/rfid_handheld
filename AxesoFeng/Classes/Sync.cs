@@ -17,10 +17,9 @@ namespace AxesoFeng
     {
 
         private RestClient client;
-
         private int idClient;
-
         private String pathFolderName;
+        public bool conection;
 
         private class GetObject {
             public List<SyncProduct> products { get; set; }
@@ -162,94 +161,205 @@ namespace AxesoFeng
             }            
             return true;
         }
+        
+        //public bool POST(SyncForm sync)
+        //{
+        //    Cursor.Current = Cursors.WaitCursor;
+        //    Directory.CreateDirectory(pathFolderName);
+        //    string[] filePaths = Directory.GetFiles(pathFolderName);
+        //    List<string> upcFiles = new List<string>();
+        //    List<string> inputs = new List<string>();
+        //    List<string> outputs = new List<string>();
+        //    List<string> epcFiles = new List<string>();
+        //    List<string> messages = new List<string>();
 
-        public bool POST(SyncForm sync)
+        //    //fill list file names 
+        //    foreach (String path in filePaths)
+        //    {
+        //        if (path.Contains("epc") )
+        //            epcFiles.Add(path);
+        //        if (path.Contains("iepc"))
+        //            inputs.Add(path);
+        //        if (path.Contains("oepc"))
+        //            outputs.Add(path);
+        //        if (path.Contains("message"))
+        //            messages.Add(path);
+        //    }
+
+        //    sync.updateInventory(inputs.Count.ToString() + " Entradas");
+        //    sync.updateOrder(outputs.Count.ToString() + " Salidas");
+        //    Application.DoEvents();
+
+        //    int numInputs = upcFiles.Count;
+        //    int numOuputs = epcFiles.Count;
+
+        //    foreach (String path1 in epcFiles)
+        //    {
+        //        var request = new RestRequest("ordenesmhd", Method.POST);
+        //        request.RequestFormat = DataFormat.Json;
+        //        request.AddBody(OrderMToJson(deserealizeNameFile(path1)));
+        //        IRestResponse response = client.Execute(request);
+        //        if (!requestError(response.StatusCode.ToString()))
+        //            return false;
+        //        if (response.Content.Equals("yes save"))
+        //        {
+        //            List<SyncOrdenEsD> orden_es_ds = new List<SyncOrdenEsD>();
+        //            using (CsvFileReader reader = new CsvFileReader(path1))
+        //            {
+        //                String epc;
+        //                CsvRow rowcsv = new CsvRow();
+        //                while (reader.ReadRow(rowcsv))
+        //                    orden_es_ds.Add(new SyncOrdenEsD(rowcsv[0],1));
+        //            }
+        //            foreach (SyncOrdenEsD order in orden_es_ds)
+        //            {
+        //                request = new RestRequest("ordenesd", Method.POST);
+        //                request.RequestFormat = DataFormat.Json;
+        //                request.AddBody(OrderDToJson(order));
+        //                response = client.Execute(request);
+        //                if (!requestError(response.StatusCode.ToString()))
+        //                    return false;
+        //            }
+        //            try {
+        //                String nameFileMessage = path1.Replace("iepcs", "message").Replace("oepcs", "message");
+        //                request = new RestRequest("logs", Method.POST);
+        //                request.RequestFormat = DataFormat.Json;
+        //                request.AddBody(LogToJson(deserealizeNameFileLog(nameFileMessage)));
+        //                response = client.Execute(request);
+        //                if (!requestError(response.StatusCode.ToString()))
+        //                    return false;
+        //                Application.DoEvents();
+        //                //File.Move(nameFileMessage, nameFileMessage.Replace("rfiddata", "rfiddataold"));      
+        //            }
+        //            catch (Exception exc) { }
+        //            if (path1.Contains("iepc"))
+        //            {
+        //                numInputs--;
+        //                sync.updateInventory(numInputs + " Inventarios");
+        //            }
+        //            else if (path1.Contains("oepc"))
+        //            {
+        //                numOuputs--;
+        //                sync.updateOrder(numOuputs + " Salidas");
+        //            }
+        //            Application.DoEvents();
+        //            //File.Move(path1, path1.Replace("rfiddata", "rfiddataold"));
+        //            //File.Move(path1.Replace("epc", "upc"), path1.Replace("rfiddata", "rfiddataold").Replace("epc", "upc"));
+        //        }
+        //    }
+        //    Cursor.Current = Cursors.Default;
+        //    return true;
+        //}
+        
+        public bool POSTTrans(SyncForm sync, int idUser, string pwd, int idClient)
         {
-            Cursor.Current = Cursors.WaitCursor;
             Directory.CreateDirectory(pathFolderName);
             string[] filePaths = Directory.GetFiles(pathFolderName);
             List<string> upcFiles = new List<string>();
-            List<string> invetories = new List<string>();
-            List<string> orderExists = new List<string>();
             List<string> epcFiles = new List<string>();
             List<string> messages = new List<string>();
+            int numInputs = 0;
+            int numOutputs = 0;
 
-            //fill list file names 
             foreach (String path in filePaths)
             {
-                if (path.Contains("epc") )
+                if (path.Contains("epc"))
                     epcFiles.Add(path);
-                if (path.Contains("iepc"))
-                    invetories.Add(path);
-                if (path.Contains("oepc"))
-                    orderExists.Add(path);
                 if (path.Contains("message"))
                     messages.Add(path);
+                if (path.Contains("iepc"))
+                    numInputs++;
+                if (path.Contains("oepc"))
+                    numOutputs++;
             }
 
-            sync.updateInventory(invetories.Count.ToString() + " Inventarios");
-            sync.updateOrder(orderExists.Count.ToString() + " Salidas");
+            sync.updateInputs(numInputs.ToString() + " Inventarios");
+            sync.updateOutputs(numOutputs.ToString() + " Salidas");
             Application.DoEvents();
-
-            int numInventories = upcFiles.Count;
-            int numOrders = epcFiles.Count;
 
             foreach (String path1 in epcFiles)
             {
-                var request = new RestRequest("ordenesmhd", Method.POST);
+                var request = new RestRequest("sync", Method.POST);
                 request.RequestFormat = DataFormat.Json;
-                request.AddBody(OrderMToJson(deserealizeNameFile(path1)));
+                request.AddBody(buildPOSTRequest(path1, ""));
                 IRestResponse response = client.Execute(request);
                 if (!requestError(response.StatusCode.ToString()))
                     return false;
-                if (response.Content.Equals("yes save"))
-                {
-                    List<SyncOrdenEsD> orden_es_ds = new List<SyncOrdenEsD>();
-                    using (CsvFileReader reader = new CsvFileReader(path1))
-                    {
-                        String epc;
-                        CsvRow rowcsv = new CsvRow();
-                        while (reader.ReadRow(rowcsv))
-                            orden_es_ds.Add(new SyncOrdenEsD(rowcsv[0],1));
-                    }
-                    foreach (SyncOrdenEsD order in orden_es_ds)
-                    {
-                        request = new RestRequest("ordenesd", Method.POST);
-                        request.RequestFormat = DataFormat.Json;
-                        request.AddBody(OrderDToJson(order));
-                        response = client.Execute(request);
-                        if (!requestError(response.StatusCode.ToString()))
-                            return false;
-                    }
-                    try {
-                        String nameFileMessage = path1.Replace("iepcs", "message").Replace("oepcs", "message");
-                        request = new RestRequest("logs", Method.POST);
-                        request.RequestFormat = DataFormat.Json;
-                        request.AddBody(LogToJson(deserealizeNameFileLog(nameFileMessage)));
-                        response = client.Execute(request);
-                        if (!requestError(response.StatusCode.ToString()))
-                            return false;
-                        Application.DoEvents();
-                        File.Move(nameFileMessage, nameFileMessage.Replace("rfiddata", "rfiddataold"));      
-                    }
-                    catch (Exception exc) { }
-                    if (path1.Contains("iepc"))
-                    {
-                        numInventories--;
-                        sync.updateInventory(numInventories + " Inventarios");
-                    }
-                    else if (path1.Contains("oepc"))
-                    {
-                        numOrders--;
-                        sync.updateOrder(numOrders + " Salidas");
-                    }
-                    Application.DoEvents();
-                    File.Move(path1, path1.Replace("rfiddata", "rfiddataold"));
-                    File.Move(path1.Replace("epc", "upc"), path1.Replace("rfiddata", "rfiddataold").Replace("epc", "upc"));
+                
+                Application.DoEvents();
+                String nameFileMessage = path1.Replace("iepcs", "message").Replace("oepcs", "message");
+                File.Move(nameFileMessage, nameFileMessage.Replace("rfiddata", "rfiddataold"));
+                File.Move(path1, path1.Replace("rfiddata", "rfiddataold"));
+                File.Move(path1.Replace("epc", "upc"), path1.Replace("rfiddata", "rfiddataold").Replace("epc", "upc"));
+                if (path1.Contains("iepc")){
+                    numInputs--;
+                    sync.updateInputs(numInputs.ToString() + " Entradas");                    
+                }
+                else if (path1.Contains("oepc")){
+                    numOutputs--;
+                    sync.updateOutputs(numOutputs.ToString() + " Salidas");                   
                 }
             }
-            Cursor.Current = Cursors.Default;
             return true;
+        }
+
+        private JsonObject buildPOSTRequest(String path, String path1)
+        {
+            var inventories = new JsonArray();
+
+            if (path != "")
+                inventories.Add(buildInventory(path));
+
+            String nameFileMessage = path.Replace("iepcs", "message").Replace("oepcs", "message");
+
+            var messages = new JsonArray();
+
+            messages.Add(LogToJson(deserealizeNameFileLog(nameFileMessage)));
+
+            var json = new JsonObject();
+            json.Add("inventories", inventories);
+            json.Add("messages", messages);
+
+            return json;
+        }
+
+        private JsonObject buildInventory(String path1)
+        {
+            var inventory = new JsonObject();
+            var epcs = new JsonArray();
+            SyncOrdenEsM OrderM = deserealizeNameFile(path1);
+            using (CsvFileReader reader = new CsvFileReader(path1))
+            {
+                CsvRow rowcsv = new CsvRow();
+                while (reader.ReadRow(rowcsv))
+                {
+                    epcs.Add(rowcsv[0]);
+                }
+            }
+            inventory.Add("client_id", idClient);
+            inventory.Add("created_at", OrderM.date_time);
+            inventory.Add("updated_at", OrderM.date_time);
+            inventory.Add("folio", OrderM.folio);
+            inventory.Add("type", OrderM.type);
+            inventory.Add("warehouse_id", OrderM.warehouse_id);
+            inventory.Add("pending", 0);
+            inventory.Add("handheld", 1);
+            inventory.Add("epcs", epcs);
+
+            return inventory;
+
+            //JsonObject json = new JsonObject();
+            //json.Add("client_id", OrderM.client_id);
+            ////json.Add("customer_id", OrderM.customer_id);
+            //json.Add("created_at", OrderM.date_time);
+            //json.Add("updated_at", OrderM.date_time);
+            //json.Add("folio", OrderM.folio);
+            //json.Add("type", OrderM.type);
+            //json.Add("warehouse_id", OrderM.warehouse_id);
+            //json.Add("pending", 0);
+            //json.Add("handheld", 1);
+            //return json;
+
         }
 
         private bool requestError(String StatusCode)
