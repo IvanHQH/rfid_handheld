@@ -48,6 +48,7 @@
             this.FolioBox.Name = "FolioBox";
             this.FolioBox.Size = new System.Drawing.Size(234, 21);
             this.FolioBox.TabIndex = 5;
+            this.FolioBox.Text = "GREEN_RE005267_1.txt";
             // 
             // pbBack
             // 

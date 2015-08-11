@@ -26,6 +26,18 @@ namespace AxesoFeng
             public List<SyncWarehouse> warehouses { get; set; }
         }
 
+        //private class GetFolio
+        //{
+        //    public List<FolioProduct> products { get; set; }
+        //}
+
+        //public class FolioProduct
+        //{
+        //    public String upc { get; set; }
+        //    public String name { get; set; }
+        //    public int quantity { get; set; }
+        //}
+
         public class SyncProduct {
             public int id { get; set; }
             public String upc { get; set; }
@@ -161,96 +173,7 @@ namespace AxesoFeng
             }            
             return true;
         }
-        
-        //public bool POST(SyncForm sync)
-        //{
-        //    Cursor.Current = Cursors.WaitCursor;
-        //    Directory.CreateDirectory(pathFolderName);
-        //    string[] filePaths = Directory.GetFiles(pathFolderName);
-        //    List<string> upcFiles = new List<string>();
-        //    List<string> inputs = new List<string>();
-        //    List<string> outputs = new List<string>();
-        //    List<string> epcFiles = new List<string>();
-        //    List<string> messages = new List<string>();
 
-        //    //fill list file names 
-        //    foreach (String path in filePaths)
-        //    {
-        //        if (path.Contains("epc") )
-        //            epcFiles.Add(path);
-        //        if (path.Contains("iepc"))
-        //            inputs.Add(path);
-        //        if (path.Contains("oepc"))
-        //            outputs.Add(path);
-        //        if (path.Contains("message"))
-        //            messages.Add(path);
-        //    }
-
-        //    sync.updateInventory(inputs.Count.ToString() + " Entradas");
-        //    sync.updateOrder(outputs.Count.ToString() + " Salidas");
-        //    Application.DoEvents();
-
-        //    int numInputs = upcFiles.Count;
-        //    int numOuputs = epcFiles.Count;
-
-        //    foreach (String path1 in epcFiles)
-        //    {
-        //        var request = new RestRequest("ordenesmhd", Method.POST);
-        //        request.RequestFormat = DataFormat.Json;
-        //        request.AddBody(OrderMToJson(deserealizeNameFile(path1)));
-        //        IRestResponse response = client.Execute(request);
-        //        if (!requestError(response.StatusCode.ToString()))
-        //            return false;
-        //        if (response.Content.Equals("yes save"))
-        //        {
-        //            List<SyncOrdenEsD> orden_es_ds = new List<SyncOrdenEsD>();
-        //            using (CsvFileReader reader = new CsvFileReader(path1))
-        //            {
-        //                String epc;
-        //                CsvRow rowcsv = new CsvRow();
-        //                while (reader.ReadRow(rowcsv))
-        //                    orden_es_ds.Add(new SyncOrdenEsD(rowcsv[0],1));
-        //            }
-        //            foreach (SyncOrdenEsD order in orden_es_ds)
-        //            {
-        //                request = new RestRequest("ordenesd", Method.POST);
-        //                request.RequestFormat = DataFormat.Json;
-        //                request.AddBody(OrderDToJson(order));
-        //                response = client.Execute(request);
-        //                if (!requestError(response.StatusCode.ToString()))
-        //                    return false;
-        //            }
-        //            try {
-        //                String nameFileMessage = path1.Replace("iepcs", "message").Replace("oepcs", "message");
-        //                request = new RestRequest("logs", Method.POST);
-        //                request.RequestFormat = DataFormat.Json;
-        //                request.AddBody(LogToJson(deserealizeNameFileLog(nameFileMessage)));
-        //                response = client.Execute(request);
-        //                if (!requestError(response.StatusCode.ToString()))
-        //                    return false;
-        //                Application.DoEvents();
-        //                //File.Move(nameFileMessage, nameFileMessage.Replace("rfiddata", "rfiddataold"));      
-        //            }
-        //            catch (Exception exc) { }
-        //            if (path1.Contains("iepc"))
-        //            {
-        //                numInputs--;
-        //                sync.updateInventory(numInputs + " Inventarios");
-        //            }
-        //            else if (path1.Contains("oepc"))
-        //            {
-        //                numOuputs--;
-        //                sync.updateOrder(numOuputs + " Salidas");
-        //            }
-        //            Application.DoEvents();
-        //            //File.Move(path1, path1.Replace("rfiddata", "rfiddataold"));
-        //            //File.Move(path1.Replace("epc", "upc"), path1.Replace("rfiddata", "rfiddataold").Replace("epc", "upc"));
-        //        }
-        //    }
-        //    Cursor.Current = Cursors.Default;
-        //    return true;
-        //}
-        
         public bool POSTTrans(SyncForm sync, int idUser, string pwd, int idClient)
         {
             Directory.CreateDirectory(pathFolderName);
@@ -312,19 +235,20 @@ namespace AxesoFeng
 
             String nameFileMessage = path.Replace("iepcs", "message").Replace("oepcs", "message");
 
-            var messages = new JsonArray();
+            //var messages = new JsonArray();
 
-            messages.Add(LogToJson(deserealizeNameFileLog(nameFileMessage)));
+            //messages.Add(LogToJson(deserealizeNameFileLog(nameFileMessage)));
 
             var json = new JsonObject();
             json.Add("inventories", inventories);
-            json.Add("messages", messages);
+            //json.Add("messages", messages);
 
             return json;
         }
 
         private JsonObject buildInventory(String path1)
         {
+            string messages;
             var inventory = new JsonObject();
             var epcs = new JsonArray();
             SyncOrdenEsM OrderM = deserealizeNameFile(path1);
@@ -336,7 +260,9 @@ namespace AxesoFeng
                     epcs.Add(rowcsv[0]);
                 }
             }
+            messages = buildMessages(path1);
             inventory.Add("client_id", idClient);
+            inventory.Add("user_id", 1);
             inventory.Add("created_at", OrderM.date_time);
             inventory.Add("updated_at", OrderM.date_time);
             inventory.Add("folio", OrderM.folio);
@@ -345,21 +271,24 @@ namespace AxesoFeng
             inventory.Add("pending", 0);
             inventory.Add("handheld", 1);
             inventory.Add("epcs", epcs);
-
+            inventory.Add("messages", messages);
             return inventory;
 
-            //JsonObject json = new JsonObject();
-            //json.Add("client_id", OrderM.client_id);
-            ////json.Add("customer_id", OrderM.customer_id);
-            //json.Add("created_at", OrderM.date_time);
-            //json.Add("updated_at", OrderM.date_time);
-            //json.Add("folio", OrderM.folio);
-            //json.Add("type", OrderM.type);
-            //json.Add("warehouse_id", OrderM.warehouse_id);
-            //json.Add("pending", 0);
-            //json.Add("handheld", 1);
-            //return json;
+        }
 
+        private string buildMessages(String path)
+        {
+            string messages = "";
+            String nameFileMessage = path.Replace("iepcs", "message").Replace("oepcs", "message");
+            using (CsvFileReader reader = new CsvFileReader(nameFileMessage))
+            {
+                CsvRow rowcsv = new CsvRow();
+                while (reader.ReadRow(rowcsv))
+                {
+                    messages = messages + "," + rowcsv[0];
+                }
+            }
+            return messages;
         }
 
         private bool requestError(String StatusCode)
@@ -399,11 +328,22 @@ namespace AxesoFeng
             SyncOrdenEsM orden = null;
             try
             {
-                orden = new SyncOrdenEsM(int.Parse(comp[(int)SyncOrdenEsM.index.client_id]),
-                    FormatDateTime(comp[(int)SyncOrdenEsM.index.date_time].Replace(".csv","")),
-                    comp[(int)SyncOrdenEsM.index.folio],
-                    Type(comp[0].Replace(pathFolderName, "")[0]),
-                    int.Parse(comp[(int)SyncOrdenEsM.index.warehouse_id]));
+                if (comp.Length <= 6)
+                {
+                    orden = new SyncOrdenEsM(int.Parse(comp[(int)SyncOrdenEsM.index.client_id]),
+                        FormatDateTime(comp[(int)SyncOrdenEsM.index.date_time].Replace(".csv", "")),
+                        comp[(int)SyncOrdenEsM.index.folio],
+                        Type(comp[0].Replace(pathFolderName, "")[0]),
+                        int.Parse(comp[(int)SyncOrdenEsM.index.warehouse_id]));
+                }
+                else
+                {
+                    orden = new SyncOrdenEsM(int.Parse(comp[(int)SyncOrdenEsM.index.client_id]),
+                        FormatDateTime(comp[(int)SyncOrdenEsM.index.date_time+2].Replace(".csv", "")),
+                        comp[(int)SyncOrdenEsM.index.folio] + "_" +comp[(int)SyncOrdenEsM.index.folio+1] + "_"+ comp[(int)SyncOrdenEsM.index.folio+2],
+                        Type(comp[0].Replace(pathFolderName, "")[0]),
+                        int.Parse(comp[(int)SyncOrdenEsM.index.warehouse_id]));
+                }
             }
             catch (Exception exc) { }
             return orden;
@@ -418,10 +358,17 @@ namespace AxesoFeng
             {
                 log = new SyncLog();
                 log.client_id = int.Parse(comp[(int)SyncOrdenEsM.index.client_id]);
-                log.date_time = FormatDateTime(comp[(int)SyncOrdenEsM.index.date_time].Replace(".csv", ""));
-                log.folio = comp[(int)SyncOrdenEsM.index.folio];
+                if (comp.Length <= 6){
+                    log.date_time = FormatDateTime(comp[(int)SyncOrdenEsM.index.date_time].Replace(".csv", ""));
+                    log.folio = comp[(int)SyncOrdenEsM.index.folio];
+                }
+                else {
+                    log.date_time = FormatDateTime(comp[(int)SyncOrdenEsM.index.date_time+2].Replace(".csv", ""));
+                    log.folio = comp[(int)SyncOrdenEsM.index.folio] + "_" + 
+                        comp[(int)SyncOrdenEsM.index.folio + 1] + "_" + comp[(int)SyncOrdenEsM.index.folio + 2];
+                }
                 //log.type = Type(comp[0].Replace("\\rfiddata\\", "")[0]);
-                log.type = Type(comp[0].Replace("\\"+pathFolderName, "")[0]);
+                log.type = Type(comp[0].Replace("\\" + pathFolderName, "")[0]);
                 log.user_id = 1;
                 log.description = ContentFile(path);
             }
@@ -470,78 +417,36 @@ namespace AxesoFeng
             return dateTimeF;
         }
 
-        private JsonObject OrderMToJson(SyncOrdenEsM OrderM)
-        {
-            JsonObject json = new JsonObject();
-            json.Add("client_id", OrderM.client_id);
-            //json.Add("customer_id", OrderM.customer_id);
-            json.Add("created_at",OrderM.date_time);
-            json.Add("updated_at",OrderM.date_time);
-            json.Add("folio",OrderM.folio);
-            json.Add("type",OrderM.type);
-            json.Add("warehouse_id", OrderM.warehouse_id);
-            json.Add("pending",0);
-            json.Add("handheld", 1);
-            return json;
-        }
+        //internal void UpdatedDataBase(Hashtable productsRead, List<Product> productlist)
+        //{
+        //    List<String> productsUnre = ListUPCUnrecognized(productsRead, productlist);
+        //    SyncProduct prodResp;
+        //    foreach (String product in productsUnre)
+        //    {
+        //        prodResp = GETProduct(product);
+        //        AddProductDataBase(prodResp);
+        //    }
+        //}
 
-        private JsonObject OrderDToJson(SyncOrdenEsD OrderD)
-        {
-            JsonObject json = new JsonObject();
-            json.Add("id", 0);
-            json.Add("epc", OrderD.epc);
-            json.Add("updated_at", OrderD.updated_at);
-            json.Add("created_at", OrderD.created_at);
-            json.Add("quantity", OrderD.quantity);
-            json.Add("upc", OrderD.upc);
-            json.Add("orden_es_m_id", 0);
-            json.Add("client_id", idClient);
-            return json;
-        }
-
-        private JsonObject LogToJson(SyncLog log)
-        {
-            JsonObject json = new JsonObject();
-            json.Add("client_id", log.client_id);
-            json.Add("created_at", log.date_time);
-            json.Add("updated_at", log.date_time);
-            json.Add("folio", log.folio);
-            json.Add("type", log.type);
-            json.Add("user_id", log.user_id);
-            json.Add("description", log.description);
-            return json;
-        }
-
-        internal void UpdatedDataBase(Hashtable productsRead, List<Product> productlist)
-        {
-            List<String> productsUnre = ListUPCUnrecognized(productsRead,productlist);
-            SyncProduct prodResp;
-            foreach (String product in productsUnre)
-            {
-                prodResp = GETProduct(product);
-                AddProductDataBase(prodResp);
-            }
-        }
-
-        private bool AddProductDataBase(SyncProduct product)
-        {
-            using (CsvFileWriter writer = new CsvFileWriter(pathFolderName + "productsrfid.csv"))
-            {
-                CsvRow row = new CsvRow();
-                row.Add(product.upc);
-                row.Add(product.name);
-                writer.WriteRow(row);
-            }
-            var request = new RestRequest("add_product", Method.POST);
-            request.RequestFormat = DataFormat.Json;
-            request.AddBody(product);
-            IRestResponse response = client.Execute(request);
-            if (!requestError(response.StatusCode.ToString()))
-                return false;
-            if (!response.Content.Equals("yes save"))
-                return false;
-            return true;
-        }
+        //private bool AddProductDataBase(SyncProduct product)
+        //{
+        //    using (CsvFileWriter writer = new CsvFileWriter(pathFolderName + "productsrfid.csv"))
+        //    {
+        //        CsvRow row = new CsvRow();
+        //        row.Add(product.upc);
+        //        row.Add(product.name);
+        //        writer.WriteRow(row);
+        //    }
+        //    var request = new RestRequest("add_product", Method.POST);
+        //    request.RequestFormat = DataFormat.Json;
+        //    request.AddBody(product);
+        //    IRestResponse response = client.Execute(request);
+        //    if (!requestError(response.StatusCode.ToString()))
+        //        return false;
+        //    if (!response.Content.Equals("yes save"))
+        //        return false;
+        //    return true;
+        //}
 
         private List<String> ListUPCUnrecognized(Hashtable productsRead, List<Product> productlist) 
         {

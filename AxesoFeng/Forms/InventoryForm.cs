@@ -152,7 +152,10 @@ namespace AxesoFeng
                     if (WarehouseBox.SelectedItem == null)
                         MessageBox.Show("Seleccione un almacén", "Orden de Salida");
                     else
+                    {
+                        //MessageBox.Show("01");
                         CompareTo((WarehouseBox.SelectedItem as ComboboxItem).Value.ToString(), 1);
+                    }
                     break;
                 case Global.Version.INVENTORY:
                     CompareTo("0", 1);
@@ -166,6 +169,8 @@ namespace AxesoFeng
 
         private void pbFolio_Click(object sender, EventArgs e)
         {
+            folioForm.firstFocus = true;
+            folioForm.setFolio(this.folio);
             folioForm.Show();
         }
 

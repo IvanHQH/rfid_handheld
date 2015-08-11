@@ -43,9 +43,19 @@ namespace AxesoFeng
                     switch ((Global.Version)menu.configData.version)
                     {
                         case Global.Version.ISCAM:
-                            reportBox.Items.Add(comp[3] + " " +
-                                //Date only whit tens 
-                            Sync.FormatDateTime(comp[4]).Substring(2, comp[4].Length - 2));
+                            if (comp.Length <= 6)
+                            {
+                                reportBox.Items.Add(comp[3] + " " +
+                                    //Date only whit tens 
+                               Sync.FormatDateTime(comp[4]).Substring(2, comp[4].Length - 2));
+                            }
+                            else
+                            {
+                                //if name file has two caracter '_'
+                                reportBox.Items.Add(comp[3] + "_" + comp[4] + " " + "_" + comp[5] + " " +
+                                    //Date only whit tens 
+                               Sync.FormatDateTime(comp[6]).Substring(2, comp[6].Length - 2));
+                            }
                             break;
                         case Global.Version.INVENTORY_PLACE:
                         case Global.Version.INVENTORY:

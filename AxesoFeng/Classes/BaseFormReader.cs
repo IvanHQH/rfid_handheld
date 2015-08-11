@@ -38,7 +38,7 @@ namespace AxesoFeng.Classes
             Config config = Config.getConfig(menu.pathFolderName + "config.json");
             ProductTable table = new ProductTable();
             Sync sync = new Sync(config.url, menu.idClient, menu.pathFolderName);
-            sync.UpdatedDataBase(menu.rrfid.m_TagTable, menu.products.items);
+            //sync.UpdatedDataBase(menu.rrfid.m_TagTable, menu.products.items);
             foreach (UpcInventory item in menu.rrfid.fillUPCsInventory(menu.products))
             {
                 table.addRow(item.upc, item.name, item.total.ToString());
@@ -78,9 +78,10 @@ namespace AxesoFeng.Classes
         protected void CompareTo(String valueWarehouse,int type)
         {
             Cursor.Current = Cursors.WaitCursor;
-            FolioOrder folio = new FolioOrder(menu.configData.url);
+            FolioOrder folio = new FolioOrder(menu);
             List<string> messages = new List<string>();
             List<RespFolio.Products> productsRead = ProductsRead();
+            //MessageBox.Show("02");
             messages = folio.CompareTo(productsRead, this.folio);
             comparisonSuccesfull = false;
             if (messages.Count == 0)

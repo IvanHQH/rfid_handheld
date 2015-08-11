@@ -11,15 +11,28 @@ using AxesoFeng.Classes;
 
 namespace AxesoFeng
 {
-    public class FolioOrder
+    public class FolioOrder : BaseFormReader
     {
         private RestClient client;
         string bu;
 
-        public FolioOrder(String BaseUrl)
+        public class Folio
         {
-            client = new RestClient(BaseUrl);
-            bu = BaseUrl;
+            public class Product
+            {
+                public String upc { get; set; }
+                public String name { get; set; }
+                public int quantity { get; set; }
+            }
+            public List<Product> products { get; set; }
+
+        }
+        //.configData.url
+        public FolioOrder(MenuForm form)
+        {
+            menu = form;
+            client = new RestClient(menu.configData.url);
+            bu = menu.configData.url;
         }
 
         public List<RespFolio.Products> GetProductsFile(string fileName)
@@ -40,7 +53,7 @@ namespace AxesoFeng
         public List<string> CompareTo(String path)
         {
             RespFolio respFolio;
-            string folio = GetFolio(path);
+            string folio = getFolio(path);
             string fileName = Path.GetFileName(path);
             respFolio = GETServer(fileName);
             List<string> messages = new List<string>();
@@ -54,11 +67,15 @@ namespace AxesoFeng
 
         public List<string> CompareTo(List<RespFolio.Products> productsFile,String folio)
         {
-            RespFolio respFolio;
-            respFolio = GETServer(folio);
+            //RespFolio respFolio;
+            //respFolio = GETServer(folio);
+            RespFolio respFolio = getFolioFtp(menu.ftpConfig.server_name,
+                menu.ftpConfig.user_name, menu.ftpConfig.user_password, folio);
+            //MessageBox.Show("03");
             List<string> messages = new List<string>();
             if (respFolio != null)
             {
+                //MessageBox.Show("04");
                 messages = CompareTo(productsFile, respFolio);
             }
             return messages;
@@ -68,30 +85,42 @@ namespace AxesoFeng
         {
             List<string> Inequalities = new List<string>();
             bool find;
+            //MessageBox.Show("1");
             foreach (RespFolio.Products prodResp in respFolio.products)
             {
                 find = false;
                 foreach (RespFolio.Products prodFile in productsFile)
                 {
+                    //MessageBox.Show("2");
                     if (prodResp.name == prodFile.name) {
                         find = true;
-                        if (prodResp.quantity != prodFile.quantity){                            
+                        //MessageBox.Show("3");
+                        if (prodResp.quantity != prodFile.quantity){
+                            //MessageBox.Show("4");
                             Inequalities.Add(prodFile.quantity.ToString()+ 
-                                " de " +prodResp.name+ " "+prodResp.quantity + " esperados");
+                                " de " +prodResp.name+ " esperados "+prodResp.quantity );
+                            //MessageBox.Show("5");
                             break;
                         }
                     }
                 }
+                //MessageBox.Show("6");
                 if (find == false)
+                {
                     Inequalities.Add(prodResp.name + " Inexistente");
+                    //MessageBox.Show("7");
+                }
             }
             foreach (RespFolio.Products prodFile in productsFile)
             {
+                //MessageBox.Show("8");
                 find = false;
                 foreach (RespFolio.Products prodResp in respFolio.products)
                 {
+                    //MessageBox.Show("9");
                     if (prodResp.name == prodFile.name){
                         find = true;
+                        //MessageBox.Show("10");
                         break;                        
                     }
                 }
@@ -101,7 +130,7 @@ namespace AxesoFeng
             return Inequalities;
         }
 
-        private string GetFolio(string fileName)
+        private string getFolio(string fileName)
         {
             string folio; 
             string[] comp = fileName.Split(new Char[] { '_' });
@@ -128,6 +157,33 @@ namespace AxesoFeng
             //if (!requestError(response.StatusCode.ToString()))
             //    return null;
 
+            return data;
+        }
+
+        public RespFolio getFolioFtp(string serverName, string userName, string userPassword, string fileName)
+        {
+            var request = new RestRequest("getFolio", Method.POST);
+            JsonObject json = new JsonObject();
+            RespFolio resp = new RespFolio();
+            request.RequestFormat = DataFormat.Json;
+            json.Add("server_name", serverName);
+            json.Add("user_name", userName);
+            json.Add("user_password", userPassword);
+            json.Add("file_name", fileName);
+            request.AddBody(json);
+
+            IRestResponse<Folio> response = client.Execute<Folio>(request);
+            Folio data = response.Data;
+            resp.products = new List<RespFolio.Products>();
+            if(data != null)
+                foreach (Folio.Product prod in data.products)
+                    resp.products.Add(new RespFolio.Products(prod.name, prod.upc, prod.quantity));
+            return resp;
+        }
+
+        public Folio getFolioFtp(string content)
+        {
+            Folio data = new Folio();
             return data;
         }
 

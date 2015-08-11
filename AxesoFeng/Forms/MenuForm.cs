@@ -13,6 +13,7 @@ using ReadWriteCsv;
 using Newtonsoft.Json;
 using System.Reflection;
 using AxesoFeng.Forms;
+using RfidFolio;
 
 
 namespace AxesoFeng
@@ -43,6 +44,7 @@ namespace AxesoFeng
 
         //Configuration
         public Config configData;
+        public FtpConfig ftpConfig;
 
         public string myResDir;
 
@@ -56,13 +58,16 @@ namespace AxesoFeng
             //Set Config Data
             pathFolderName = getNameFolderVersion();
             configData = Config.getConfig(pathFolderName + "config.json");
+            ftpConfig = FtpConfig.getConfig(pathFolderName + "ftp.json");
             idClient = configData.id_client;
             showCaptureFolio = true;
             //Set Synchronization
             sync = new Sync(configData.url,idClient,pathFolderName);
             sync.conection = sync.GETTest();
-            if(sync.conection)
+            if (sync.conection)
+            {                
                 sync.GET();
+            }
             //Set Reader
             rrfid = new SimpleRFID();
             //rrfid.changeEPC("30342848A80A5AC0000007D9", "30342848A80A5A400001000A");
